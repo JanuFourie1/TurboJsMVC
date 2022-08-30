@@ -49,7 +49,7 @@
           </ul>
         </li>
         <li><a href="#section4">Courses</a></li>
-        <li><a href="#">Sign In</a></li>
+        <li onclick="GoToLogin()"><a href="@Url.Action("Login", "Login")">Sign In</a></li>
       </ul>
     </nav>
   </header>
@@ -323,6 +323,10 @@
     <script>
         //according to loftblog tut
         $('.nav li:first').addClass('active');
+
+        function GoToLogin() {
+            window.location = '@Url.Action("Login", "Login")';
+        }
 
         var showSection = function showSection(section, isAnimate) {
           var

@@ -22,7 +22,7 @@ namespace TurboJsMVC.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
+                          View() :
                           Problem("Entity set 'GRP27ETutorContext.Users'  is null.");
         }
 
@@ -45,16 +45,42 @@ namespace TurboJsMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginUser(string username, string password)
+        public async Task<IActionResult> LoginUser(Login objLogin)
         {
-            var usernameCheck = await _context.Users.FirstOrDefaultAsync(m => m.Username == username);
-            var passwordCheck = await _context.Users.FirstOrDefaultAsync(m => m.Password == password);
-            if (usernameCheck == null || passwordCheck == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var userCheck = await _context.Users.FirstOrDefaultAsync(a => a.Email.Equals(objLogin.Email) && a.Password.Equals(objLogin.Password));
+                if (userCheck != null)
+                {
+                    HttpContext.Session.SetString("Username", userCheck.Username);
+                    HttpContext.Session.SetInt32("UserId", userCheck.UserId);
+                    if (userCheck.IsAdmin)
+                    {
+                        return RedirectToAction("AdminDashboard", "AdminDashboard");
+                    }else if (userCheck.IsLecture)
+                    {
+                        return RedirectToAction("LectureDashboard", "LectureDashboard");
+                    }else if (userCheck.IsStudent)
+                    {
+                        return RedirectToAction("StudentDashboard", "StudentDashboard");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Login");
+                    }
+                    
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
             }
 
-            return Ok(usernameCheck);
+            
         }
 
         // GET: Login/Create

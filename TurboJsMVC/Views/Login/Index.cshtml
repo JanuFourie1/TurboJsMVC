@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model TurboJsMVC.Models.Login;
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Login - TurboJs</title>
@@ -9,6 +10,8 @@
   src="https://code.jquery.com/jquery-3.6.1.js"
   integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 	body{
 	margin: 0;
@@ -109,45 +112,33 @@ button:hover{
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
+
+				@using (Html.BeginForm("LoginUser", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
+					@Html.TextBoxFor(a => a.Email, new { placeholder = "Email", type="email", required=""})
+					@Html.TextBoxFor(a => a.Password, new { placeholder = "Password", type="password", required=""})
 					<button>Sign up</button>
-				</form>
-				<button onclick="SubmitDetails()">Back To Home</button>
+				}
+				<button onclick="HomeView()">Back To Home</button>
 			</div>
 
 			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Login</button>
-				</form>
-				<button>Back To Home</button>
+				@using (Html.BeginForm("LoginUser", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label for="chk" aria-hidden="true">Login</label>
+					@Html.TextBoxFor(a => a.Email, new { placeholder = "Email", type="email", required=""})
+					@Html.TextBoxFor(a => a.Password, new { placeholder = "Password", type="password", required=""})
+					<button type="submit">Login</button>
+				}
+				<button onclick="HomeView()">Back To Home</button>
 			</div>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
-	function SubmitDetails() {
-        $.ajax({
-            "url": "/Login/LoginUser",
-            "async": true,
-            "data": {
-                username: "Janu Fourie",
-				password: "JanuFourie"
-            },
-            "type": "POST",
-            "dataType": "Json",
-            "success": function (response) {
-                console.log(response);
-                        },
-            "error": function (response) {
-                console.log("Error");
-              }
-             });
+	function HomeView() {
+        window.location = '@Url.Action("Index", "Home")'
     }
 </script>

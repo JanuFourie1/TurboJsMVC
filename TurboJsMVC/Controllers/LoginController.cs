@@ -32,8 +32,6 @@ namespace TurboJsMVC.Controllers
         public async Task<IActionResult> LoginUser(Login objLogin)
         {
             Result<bool> result = new Result<bool>();
-            if (ModelState.IsValid)
-            {
                 var userCheck = await _context.Users.FirstOrDefaultAsync(a => a.Email.Equals(objLogin.Email) && a.Password.Equals(objLogin.Password));
                 if (userCheck != null)
                 {
@@ -61,12 +59,6 @@ namespace TurboJsMVC.Controllers
                     _toastNotification.AddErrorToastMessage("Invalid login details");
                     return RedirectToAction("Index", "Login");
                 }
-            }
-            else
-            {
-                _toastNotification.AddErrorToastMessage("Oops, something went wrong!");
-                return RedirectToAction("Index", "Login");
-            }
 
             
         }

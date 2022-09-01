@@ -1,7 +1,10 @@
 using TurboJsMVC.Models;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMvc().AddNToastNotifyToastr();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -34,6 +37,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
+
+app.UseNToastNotify();
 
 app.MapControllerRoute(
     name: "default",

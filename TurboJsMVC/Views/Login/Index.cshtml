@@ -113,13 +113,13 @@ button:hover{
 
 			<div class="signup">
 
-				@using (Html.BeginForm("LoginUser", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				@using (Html.BeginForm("SignUpUser", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
+					@Html.TextBoxFor(a => a.UserName, new { placeholder = "Full Name", type="text", required=""})
 					@Html.TextBoxFor(a => a.Email, new { placeholder = "Email", type="email", required=""})
 					@Html.TextBoxFor(a => a.Password, new { placeholder = "Password", type="password", required=""})
-					<button>Sign up</button>
+					<button type="submit">Sign up</button>
 				}
 				<button onclick="HomeView()">Back To Home</button>
 			</div>
@@ -128,16 +128,21 @@ button:hover{
 				@using (Html.BeginForm("LoginUser", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <label for="chk" aria-hidden="true">Login</label>
-					@Html.TextBoxFor(a => a.Email, new { placeholder = "Email", type="email", required=""})
-					@Html.TextBoxFor(a => a.Password, new { placeholder = "Password", type="password", required=""})
+					@Html.TextBoxFor(l => l.Email, new { placeholder = "Email", type="email", required=""})
+					@Html.TextBoxFor(l => l.Password, new { placeholder = "Password", type="password", required=""})
 					<button type="submit">Login</button>
 				}
 				<button onclick="HomeView()">Back To Home</button>
 			</div>
 	</div>
+	@await Component.InvokeAsync("NToastNotify")
 </body>
 </html>
 <script type="text/javascript">
+	$(document).ready(function() {
+        console.log();
+        });
+
 	function HomeView() {
         window.location = '@Url.Action("Index", "Home")'
     }

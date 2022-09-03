@@ -1,8 +1,4 @@
-﻿
-@{
-    Layout = "";
-}
-    <!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -133,15 +129,8 @@
             background-position: center;
             background-color: green;
             background-size: cover;
-            height: 93vh;
-            max-height: 93vh;
-            overflow: scroll;
-            transition: 0.3s ease-in-out;
-            transform: translateY(70px);
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
+            height: 100vh;
+            transition: 0.5s ease-in-out;
         }
 
         #check:checked ~ .content{
@@ -183,7 +172,7 @@
     </div>
     <!--Sidebar end-->
     <div class="content">
+        @RenderBody()
     </div>
 </body>
 </html>
-

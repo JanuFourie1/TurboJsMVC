@@ -300,8 +300,9 @@ var totalLecturers = 0;
 var totalStudents = 0;
 var totalAdmins = 0;
     $( document ).ready(function() {
+        
         $.ajax({
-            "url": "/AdminUsers/GetAllUsers",
+            "url": "@Url.Action("GetAllUsers", "AdminUsers")",
             "async": true,
             "type": "GET",
             "dataType": "Json",
@@ -310,6 +311,7 @@ var totalAdmins = 0;
               },
         "error": function(response) {
             alert("Error fetching user data");
+            console.log(response)
         }
              });
     

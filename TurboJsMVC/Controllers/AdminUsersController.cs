@@ -28,7 +28,7 @@ namespace TurboJsMVC.Controllers
                 var users = _context.Users.ToList();
                 if (null == users || users.Count < 1)
                 {
-                    return NotFound();
+                    return BadRequest(users);
                 }
                 return Ok(users);
             }

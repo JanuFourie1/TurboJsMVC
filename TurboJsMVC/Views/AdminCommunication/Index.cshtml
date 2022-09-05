@@ -1,4 +1,4 @@
-﻿
+﻿@model Email;
 @{
     Layout = "";
 }
@@ -6,16 +6,14 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dashboard - Turbo.Js</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
     <script
   src="https://code.jquery.com/jquery-3.6.1.js"
   integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
   crossorigin="anonymous"></script>
-  
-
+    <meta name="viewport" content="width=device-width" />
+    <title>Communication - Turbo.Js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
     <style>
         body{
             margin: 0;
@@ -141,9 +139,8 @@
             height: 93vh;
             max-height: 93vh;
             overflow: scroll;
-            transition: 0.5s;
+            transition: 0.3s ease-in-out;
             transform: translateY(70px);
-            padding-right: 20px;
         }
 
         ::-webkit-scrollbar {
@@ -158,64 +155,40 @@
             display: none;
         }
 
-        .counter_container{
-            display: flex;
-            padding: 10px;
-            padding-right: 0px;
-            justify-content: space-between;
-        }
+        input[type=text], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
 
-        .counter_card{
-            border-radius: 10PX;
-            width: 20%;
-            background-color: rgba(22,34,57,0.95);
-        }
-        .counter_card h2{
-            color: #fff;
-            font-weight: 600;
-            text-align: center;
-        }
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #f5a425;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-        .table_container{
-            align-content: center;
-            width: 100%;
-            padding: 10px;
-            margin-right: 10px !important;
-        }
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #f5a425;
+}
 
-        .styled-table {
-            margin-left: 10px;
-            border-collapse: collapse;
-            margin: 0;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 100%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .styled-table thead tr {
-            background-color: rgba(22,34,57,0.95);
-            color: #ffffff;
-            text-align: left;
-        }
-
-        .styled-table th,
-        .styled-table td {
-            padding: 12px 15px;
-        }
-
-        .styled-table tbody tr {
-            border-bottom: thin solid #dddddd;
-        }
-
-        .styled-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
-        .styled-table tbody tr:last-of-type {
-            border-bottom: 2px solid rgba(22,34,57,0.95);
-        }
-
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  height: 100%;
+}
     </style>
 </head>
 <body>
@@ -249,81 +222,67 @@
     </div>
     <!--Sidebar end-->
     <div class="content">
-        <div class="counter_container">
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-user"></i> Users</h2>
-                 <h2 id="users_counter">0</h2>
-            </div>
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-cogs"></i> Admins</h2>
-                 <h2 id="admin_counter">0</h2>
-            </div>
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-briefcase"></i> Lecturers</h2>
-                 <h2 id="lecturers_counter">0</h2>
-            </div>
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-graduation-cap"></i> Students</h2>
-                <h2 id="students_counter">0</h2>
-            </div>
-        </div>
-        <div class="table_container">
-            <table class="styled-table">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Date</th>
-            <th>IP Address</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Dom</td>
-            <td>6000</td>
-            <td>Dom</td>
-        </tr>
-        <tr>
-            <td>Melissa</td>
-            <td>5150</td>
-            <td>Melissa</td>
-        </tr>
-    </tbody>
-</table>
-        </div>
+        <div class="container">
+
+                <label for="receiver">Receiver</label>
+                <select id="receiver" name="country" onchange="ReceiverChanged(this)">
+                    <option value="">-- Select --</option>
+                <option value="australia">Janu</option>
+                <option value="canada">Somila</option>
+                <option value="usa">Xolisa</option>
+                </select>
+
+                <label for="lname">Subject</label>
+                <input type="text" oninput="SubjectChange(this)" id="lname" name="lastname" placeholder="Purpose of this email">
+
+                <label for="message">Message</label>
+                <textarea oninput="MessageChanged(this)" id="message" name="subject" placeholder="Write email content..." style="height:200px"></textarea>
+
+                <input onclick="SendEmail()" type="submit" value="Submit">
+    </div>
     </div>
 </body>
 </html>
 
 <script>
-var totalUsers = 0;
-var totalLecturers = 0;
-var totalStudents = 0;
-var totalAdmins = 0;
-    $( document ).ready(function() {
+var receiver = "";
+var subject = "";
+var message = "";
+
+function ReceiverChanged(selectObject) {
+    receiver = selectObject.value;
+}
+
+function SubjectChange(textObject) {
+    subject = textObject.value;
+}
+
+function MessageChanged(textObject) {
+    message = textObject.value;
+}
+
+function SendEmail(){
         $.ajax({
-            "url": "/AdminUsers/GetAllUsers",
+            "url": "/AdminCommunication/SendEmail",
             "async": true,
-            "type": "GET",
+            "data": {
+                user: receiver,
+                subj: subject,
+                body: message
+                },
+            "type": "POST",
             "dataType": "Json",
             "success": function (response) {
-                PopulateTotals(response);
-              },
-        "error": function(response) {
-            alert("Error fetching user data");
-        }
+                alert("Email sent")
+                        },
+            "error": function (response) {
+                if (response.status === 200) {
+                    alert("Email sent")
+                } else {
+                    alert("All fields are required")
+                }
+              }
              });
-    
-    });
-
-function PopulateTotals(data){
-    totalUsers = data.length;
-    totalLecturers = data.filter(item => item.isLecture === true).length;
-    totalStudents = data.filter(item => item.isStudent === true).length;
-    totalAdmins = data.filter(item => item.isAdmin === true).length;
-    document.getElementById("users_counter").innerHTML = totalUsers.toString();
-    document.getElementById("lecturers_counter").innerHTML = totalLecturers.toString();
-    document.getElementById("students_counter").innerHTML = totalStudents.toString();
-    document.getElementById("admin_counter").innerHTML = totalAdmins.toString();
 }
 
 function LogOut() {

@@ -2,7 +2,7 @@
 using NToastNotify;
 using TurboJsMVC.Models;
 
-namespace TurboJsMVC.Controllers.Admin
+namespace TurboJsMVC.Controllers
 {
     public class AdminCommunicationController : Controller
     {
@@ -23,7 +23,7 @@ namespace TurboJsMVC.Controllers.Admin
         [HttpPost]
         public async Task<IActionResult> SendEmail(string user, string subj, string body)
         {
-            if(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(subj) || string.IsNullOrEmpty(body))
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(subj) || string.IsNullOrEmpty(body))
             {
                 _toastNotification.AddErrorToastMessage("Error, please try again");
                 return BadRequest();

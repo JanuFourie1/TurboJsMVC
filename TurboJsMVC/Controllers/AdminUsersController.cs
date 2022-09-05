@@ -2,7 +2,7 @@
 using NToastNotify;
 using TurboJsMVC.Models;
 
-namespace TurboJsMVC.Controllers.Admin
+namespace TurboJsMVC.Controllers
 {
     public class AdminUsersController : Controller
     {
@@ -25,8 +25,8 @@ namespace TurboJsMVC.Controllers.Admin
         {
             try
             {
-                var users =  _context.Users.ToList() ;
-                if(null == users || users.Count < 1)
+                var users = _context.Users.ToList();
+                if (null == users || users.Count < 1)
                 {
                     return NotFound();
                 }

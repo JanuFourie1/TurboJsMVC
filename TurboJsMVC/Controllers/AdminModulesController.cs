@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TurboJsMVC.Controllers.Admin
+namespace TurboJsMVC.Controllers
 {
-    public class AdminCoursesController : Controller
+    public class AdminModulesController : Controller
     {
         public IActionResult Index()
         {

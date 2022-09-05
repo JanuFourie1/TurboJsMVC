@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TurboJsMVC.Controllers.Admin
+namespace TurboJsMVC.Controllers
 {
     public class AdminReportingController : Controller
     {

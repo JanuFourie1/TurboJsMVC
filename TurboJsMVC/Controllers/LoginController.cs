@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,10 +17,13 @@ namespace TurboJsMVC.Controllers
         private readonly GRP27ETutorContext _context;
         private readonly IToastNotification _toastNotification;
 
-        public LoginController(GRP27ETutorContext context, IToastNotification toastNotification)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public LoginController(GRP27ETutorContext context, IToastNotification toastNotification, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _toastNotification = toastNotification;
+            this.httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,13 +35,21 @@ namespace TurboJsMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginUser(Login objLogin)
         {
+            LoginHistory history = new LoginHistory();
             Result<bool> result = new Result<bool>();
                 var userCheck = await _context.Users.FirstOrDefaultAsync(a => a.Email.Equals(objLogin.Email) && a.Password.Equals(objLogin.Password));
                 if (userCheck != null)
                 {
                     HttpContext.Session.SetString("Username", userCheck.Username);
                     HttpContext.Session.SetInt32("UserId", userCheck.UserId);
-                    if (userCheck.IsAdmin)
+                var ip = this.httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                history.UserId = userCheck.UserId;
+                history.Ip = ip;
+                DateTime date = DateTime.Now;
+                history.Date = date;
+                _context.LoginHistories.Add(history);
+                _context.SaveChanges();
+                if (userCheck.IsAdmin)
                     {
                         return RedirectToAction("AdminDashboard", "AdminDashboard");
                     }else if (userCheck.IsLecture)

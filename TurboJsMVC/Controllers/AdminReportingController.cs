@@ -1,12 +1,70 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NToastNotify;
+using TurboJsMVC.Models;
 
 namespace TurboJsMVC.Controllers
 {
     public class AdminReportingController : Controller
     {
+
+        private readonly GRP27ETutorContext _context;
+        private readonly IToastNotification _toastNotification;
+
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public AdminReportingController(GRP27ETutorContext context, IToastNotification toastNotification, IHttpContextAccessor httpContextAccessor)
+        {
+            _context = context;
+            _toastNotification = toastNotification;
+            this.httpContextAccessor = httpContextAccessor;
+        }
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetLoginHistory()
+        {
+            try
+            {
+                List<LoginHistoryCustom> list = new List<LoginHistoryCustom>();
+                var result = await Task.Run(() => _context.LoginHistories.FromSqlRaw("EXECUTE USP_GET_LoginHistory").ToList());
+                var users = await _context.Users.ToListAsync();
+
+                for (var i = 0; i < result.Count; i++)
+                {
+                    var userString = "";
+                    var emailString = "";
+                    for (var j = 0; j < users.Count; j++)
+                    {
+                        
+                        if (users[j].UserId == result[i].UserId)
+                        {
+                            userString = users[j].Username;
+                            emailString = users[j].Email;
+                        }
+                    }
+                    list.Add(new LoginHistoryCustom
+                    {
+                        Username = userString,
+                        Email = emailString,
+                        Ip = result[i].Ip,
+                        Date = result[i].Date.ToString("dddd, dd MMMM yy")
+                    });
+                }
+
+                if (null == list || list.Count < 1)
+                {
+                    return BadRequest(result);
+                }
+                return Ok(list);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

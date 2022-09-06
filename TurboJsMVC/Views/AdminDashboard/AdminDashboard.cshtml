@@ -181,6 +181,10 @@
             width: 100%;
             padding: 10px;
             margin-right: 10px !important;
+            table-layout: fixed;
+            border-collapse: collapse;
+            max-height: 76vh;
+            overflow-y: scroll;
         }
 
         .styled-table {
@@ -267,26 +271,17 @@
                 <h2 id="students_counter">0</h2>
             </div>
         </div>
-        <div class="table_container">
-            <table class="styled-table">
+        <div class="table_container tableFixHead">
+            <table class="styled-table table">
     <thead>
         <tr>
             <th>User</th>
+            <th>Email</th>
             <th>Date</th>
             <th>IP Address</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>Dom</td>
-            <td>6000</td>
-            <td>Dom</td>
-        </tr>
-        <tr>
-            <td>Melissa</td>
-            <td>5150</td>
-            <td>Melissa</td>
-        </tr>
+    <tbody id="histories_body">
     </tbody>
 </table>
         </div>
@@ -314,8 +309,36 @@ var totalAdmins = 0;
             console.log(response)
         }
              });
+
+              $.ajax({
+            "url": "@Url.Action("GetLoginHistory", "AdminReporting")",
+            "async": true,
+            "type": "GET",
+            "dataType": "Json",
+            "success": function (response) {
+                PopulateHistory(response);
+              },
+        "error": function(response) {
+            alert("Error fetching login data");
+            console.log(response)
+        }
+             });
     
     });
+
+    function PopulateHistory(histories) {
+    var html = '';
+    for (var history of histories ) {
+        html += '<tr>';
+        html += '<td>'+ history.username +'</td>';
+        html += '<td>'+ history.email +'</td>';
+        html += '<td>' + history.date + '</td>';
+        html += '<td>' + history.ip + '</td>';
+        html += '</tr>';
+
+    }
+    $('#histories_body').html(html);
+}
 
 function PopulateTotals(data){
     totalUsers = data.length;

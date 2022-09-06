@@ -9,5 +9,6 @@ namespace TurboJsMVC.Models
         public int UserId { get; set; }
         public DateTime Date { get; set; }
         public string Ip { get; set; } = null!;
+
     }
 }

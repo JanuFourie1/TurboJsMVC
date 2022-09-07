@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using System.Net;
+using System.Net.Mail;
 using TurboJsMVC.Models;
 
-namespace TurboJsMVC.Controllers
+namespace turbojsmvc.controllers
 {
     public class AdminCommunicationController : Controller
     {
@@ -30,7 +32,28 @@ namespace TurboJsMVC.Controllers
             }
             else
             {
-                return Ok();
+                try
+                {
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(user);
+                    mail.From = new MailAddress("turbojsetutor@gmail.com");
+                    mail.Sender = new MailAddress("turbojsetutor@gmail.com");
+                    mail.Subject = subj;
+                    mail.Body = body;
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp =  new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("turbojsetutor@gmail.com", "oasfdmepqwqtlssb");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                    return Ok("Message Sent");
+                }
+                catch
+                {
+                    return BadRequest();
+                }
             }
         }
     }

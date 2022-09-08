@@ -333,7 +333,9 @@ function SendEmail(){
                     $('#load_container').css({"display":"none"});
                      toastr.success("Email sent");
                 } else {
-                    toastr.success("Error sending email");
+                    $('#load_container').css({"display":"none"});
+                    toastr.error("Error sending email");
+                    console.log(response);
                 }
               }
              });

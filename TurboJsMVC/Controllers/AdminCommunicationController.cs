@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using System.Net;
-using System.Net.Mail;
 using TurboJsMVC.Models;
+using System.Net.Mail;
 
 namespace turbojsmvc.controllers
 {
@@ -41,7 +41,7 @@ namespace turbojsmvc.controllers
                     mail.Subject = subj;
                     mail.Body = body;
                     mail.IsBodyHtml = true;
-                    SmtpClient smtp =  new SmtpClient();
+                    SmtpClient smtp = new SmtpClient();
                     smtp.Host = "smtp.gmail.com";
                     smtp.Port = 587;
                     smtp.UseDefaultCredentials = false;
@@ -50,9 +50,9 @@ namespace turbojsmvc.controllers
                     smtp.Send(mail);
                     return Ok("Message Sent");
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return BadRequest();
+                    return BadRequest(ex);
                 }
             }
         }

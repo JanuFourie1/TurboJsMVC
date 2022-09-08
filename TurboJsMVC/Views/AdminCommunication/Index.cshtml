@@ -316,8 +316,7 @@ function SendEmail(){
     }else{
         $('#load_container').css({"display":"block"});
         $.ajax({
-            "url": "/AdminCommunication/SendEmail",
-            "async": true,
+            "url": @Url.Action("SendEmail","AdminCommunication"),
             "data": {
                 user: receiver,
                 subj: subject,

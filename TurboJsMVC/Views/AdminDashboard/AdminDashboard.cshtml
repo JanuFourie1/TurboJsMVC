@@ -1,29 +1,28 @@
-﻿
+﻿@model IEnumerable<TurboJsMVC.Models.LoginHistoryCustom>
 @{
     Layout = "";
 }
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Dashboard - Turbo.Js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
-    <script
-  src="https://code.jquery.com/jquery-3.6.1.js"
-  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
-  
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")" />
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"></script>
+
 
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
             font-family: "Roboto", sans-serif;
         }
 
-        header{
+        header {
             position: fixed;
             background: rgba(22,34,57,0.95);
             padding: 20px;
@@ -31,7 +30,7 @@
             height: 30px;
         }
 
-        .left_area h3{
+        .left_area h3 {
             color: #f5a425;
             margin: 0;
             text-transform: uppercase;
@@ -39,11 +38,11 @@
             font-weight: 900;
         }
 
-        .left_area span{
+        .left_area span {
             color: #ffff
         }
 
-        .logout_btn{
+        .logout_btn {
             padding: 5px;
             background-color: #f5a425;
             text-decoration: none;
@@ -58,11 +57,11 @@
             transition-property: background;
         }
 
-        .logout_btn:hover{
-            background: #f5a425;
-        }
+            .logout_btn:hover {
+                background: #f5a425;
+            }
 
-        .sidebar{
+        .sidebar {
             background: rgba(22,34,57,0.95);
             margin-top: 70px;
             padding-top: 30px;
@@ -74,39 +73,42 @@
             transition-property: left;
         }
 
-        .sidebar .profile_image{
-            width: 100px;
-            height: 100px;
-            border-radius: 100px;
-            margin-bottom: 10px;
-        }
+            .sidebar .profile_image {
+                width: 100px;
+                height: 100px;
+                border-radius: 100px;
+                margin-bottom: 10px;
+            }
 
-        .sidebar h4{
-            color: #ccc;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
+            .sidebar h4 {
+                color: #ccc;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
 
-        .sidebar a{
-            color: #fff;
-            display: block;
-            width: 100%;
-            line-height: 60px;
-            text-decoration: none;
-            padding-left: 40px;
-            box-sizing: border-box;
-        }
+            .sidebar a {
+                color: #fff;
+                display: block;
+                width: 100%;
+                line-height: 60px;
+                text-decoration: none;
+                padding-left: 40px;
+                box-sizing: border-box;
+            }
 
-        .sidebar a:hover{
-            background: #f5a425;
-        }
+                .sidebar a:hover {
+                    background: #f5a425;
+                }
 
-        .sidebar i{
-            padding-right: 10px;
+            .sidebar i {
+                padding-right: 10px;
+            }
 
-        }
+            li{
+                list-style-type: none;
+            }
 
-        label #sidebar_btn{
+        label #sidebar_btn {
             z-index: 1;
             color: #fff;
             position: fixed;
@@ -116,25 +118,25 @@
             margin: 5px 0;
         }
 
-        label #sidebar_btn:hover{
-            color: #f5a425;
-        }
+            label #sidebar_btn:hover {
+                color: #f5a425;
+            }
 
-        #check:checked ~ .sidebar{
+        #check:checked ~ .sidebar {
             left: -190px;
         }
 
-        #check:checked ~ .sidebar a span{
-            display: none;
-        }
+            #check:checked ~ .sidebar a span {
+                display: none;
+            }
 
-        #check:checked ~.sidebar a{
-            font-size: 20px;
-            margin-left: 170px;
-            width: 80px;
-        }
+            #check:checked ~ .sidebar a {
+                font-size: 20px;
+                margin-left: 170px;
+                width: 80px;
+            }
 
-        .content{
+        .content {
             margin-left: 250px;
             background-position: center;
             background-size: cover;
@@ -150,33 +152,34 @@
             display: none;
         }
 
-        #check:checked ~ .content{
+        #check:checked ~ .content {
             margin-left: 60px;
         }
 
-        #check{
+        #check {
             display: none;
         }
 
-        .counter_container{
+        .counter_container {
             display: flex;
             padding: 10px;
             padding-right: 0px;
             justify-content: space-between;
         }
 
-        .counter_card{
+        .counter_card {
             border-radius: 10PX;
             width: 20%;
             background-color: rgba(22,34,57,0.95);
         }
-        .counter_card h2{
-            color: #fff;
-            font-weight: 600;
-            text-align: center;
-        }
 
-        .table_container{
+            .counter_card h2 {
+                color: #fff;
+                font-weight: 600;
+                text-align: center;
+            }
+
+        .table_container {
             align-content: center;
             width: 100%;
             padding: 10px;
@@ -197,45 +200,87 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
 
-        .styled-table thead tr {
-            background-color: rgba(22,34,57,0.95);
-            color: #ffffff;
-            text-align: left;
-        }
+            .styled-table thead tr {
+                background-color: rgba(22,34,57,0.95);
+                color: #ffffff;
+                text-align: left;
+            }
 
-        .styled-table th,
-        .styled-table td {
-            padding: 12px 15px;
-        }
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
 
-        .styled-table tbody tr {
-            border-bottom: thin solid #dddddd;
-        }
+            .styled-table tbody tr {
+                border-bottom: thin solid #dddddd;
+            }
 
-        .styled-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
 
-        .styled-table tbody tr:last-of-type {
-            border-bottom: 2px solid rgba(22,34,57,0.95);
-        }
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid rgba(22,34,57,0.95);
+                }
+
+                li{
+                    list-style-type: none;
+                    border: 1px thin;
+                }
+
+            .page_numbers{
+                display: flex;
+                flex-direction:row;
+                margin-top: 20px;
+                
+            }
+
+            .page_numbers li{
+                margin-right: 10px;
+                transform: translateX(-40px);
+            }
+
+            .inactive{
+                border: 1px solid #f5a425;
+                text-decoration: none;
+                /*background-color: white;*/
+                color: black;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-weight:600;
+            }
+
+            .page_numbers a{
+                text-decoration: none;
+                color: black;
+            }
+
+            .active{
+                background-color: #f5a425;
+                border: 1px solid #f5a425;
+                text-decoration: none;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-weight:600;
+            }
 
     </style>
 </head>
 <body>
-    <input type="checkbox" id="check"/>
+    <input type="checkbox" id="check" />
     <!--Header area start-->
-     <header>
-         <label for="check">
-             <i class="fa-solid fa-bars" id="sidebar_btn"></i>
-         </label>
-         <div class="left_area">
-             <h3>Turbo <span>JS</span></h3>
-         </div>
-         <div class="right_area">
-             <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
-         </div>
-     </header>
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+        </div>
+    </header>
     <!--Header area end-->
     <!--Sidebar start-->
     <div class="sidebar">
@@ -250,21 +295,22 @@
         <a href="#" onclick="Modules()"><i class="fa-solid fa-book-open"></i> <span>Modules</span></a>
         <a href="#" onclick="User()"><i class="fa-solid fa-user"></i> <span>Users</span></a>
         <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+
     </div>
     <!--Sidebar end-->
     <div class="content">
         <div class="counter_container">
             <div class="counter_card">
                 <h2><i class="fa-solid fa-user"></i> Users</h2>
-                 <h2 id="users_counter">0</h2>
+                <h2 id="users_counter">0</h2>
             </div>
             <div class="counter_card">
                 <h2><i class="fa-solid fa-cogs"></i> Admins</h2>
-                 <h2 id="admin_counter">0</h2>
+                <h2 id="admin_counter">0</h2>
             </div>
             <div class="counter_card">
                 <h2><i class="fa-solid fa-briefcase"></i> Lecturers</h2>
-                 <h2 id="lecturers_counter">0</h2>
+                <h2 id="lecturers_counter">0</h2>
             </div>
             <div class="counter_card">
                 <h2><i class="fa-solid fa-graduation-cap"></i> Students</h2>
@@ -273,107 +319,143 @@
         </div>
         <div class="table_container tableFixHead">
             <table class="styled-table table">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Email</th>
-            <th>Date</th>
-            <th>IP Address</th>
-        </tr>
-    </thead>
-    <tbody id="histories_body">
-    </tbody>
-</table>
+                <thead>
+                    <tr>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            IP
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width: 25%;">@item.Username</td>
+                            <td style="width: 25%;">@item.Email</td>
+                            <td style="width: 25%;">@item.Date</td>
+                            <td style="width: 25%;">@item.Ip</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <ul class="pagination page_numbers">
+                @{
+                    int numberPage = ViewBag.numberPage;
+                    int pageCurrent = ViewBag.pageCurrent;
+                    int i;
+                    for (i = 1; i < numberPage; i++)
+                    {
+                        if (i == pageCurrent)
+                        {
+                                                                                                    <li class="active"><a href="?page=@i">@i</a></li>
+                        }
+                        else
+                        {
+                                                                                                    <li class="inactive"><a href="?page=@i">@i</a></li>
+                        }
+                    }
+                }
+            </ul>
         </div>
     </div>
 </body>
 </html>
 
 <script>
-var totalUsers = 0;
-var totalLecturers = 0;
-var totalStudents = 0;
-var totalAdmins = 0;
-    $( document ).ready(function() {
-        
+    var totalUsers = 0;
+    var totalLecturers = 0;
+    var totalStudents = 0;
+    var totalAdmins = 0;
+    $(document).ready(function() {
+
         $.ajax({
             "url": "@Url.Action("GetAllUsers", "AdminUsers")",
             "async": true,
             "type": "GET",
             "dataType": "Json",
-            "success": function (response) {
+            "success": function(response) {
                 PopulateTotals(response);
-              },
-        "error": function(response) {
-            alert("Error fetching user data");
-            console.log(response)
-        }
-             });
+            },
+            "error": function(response) {
+                alert("Error fetching user data");
+                console.log(response)
+            }
+        });
 
-              $.ajax({
+        $.ajax({
             "url": "@Url.Action("GetLoginHistory", "AdminReporting")",
             "async": true,
             "type": "GET",
             "dataType": "Json",
-            "success": function (response) {
+            "success": function(response) {
                 PopulateHistory(response);
-              },
-        "error": function(response) {
-            alert("Error fetching login data");
-            console.log(response)
-        }
-             });
-    
+            },
+            "error": function(response) {
+                alert("Error fetching login data");
+                console.log(response)
+            }
+        });
+
     });
 
     function PopulateHistory(histories) {
-    var html = '';
-    for (var history of histories ) {
-        html += '<tr>';
-        html += '<td>'+ history.username +'</td>';
-        html += '<td>'+ history.email +'</td>';
-        html += '<td>' + history.date + '</td>';
-        html += '<td>' + history.ip + '</td>';
-        html += '</tr>';
+        var html = '';
+        for (var history of histories) {
+            html += '<tr>';
+            html += '<td>' + history.username + '</td>';
+            html += '<td>' + history.email + '</td>';
+            html += '<td>' + history.date + '</td>';
+            html += '<td>' + history.ip + '</td>';
+            html += '</tr>';
 
+        }
+        $('#histories_body').html(html);
     }
-    $('#histories_body').html(html);
-}
 
-function PopulateTotals(data){
-    totalUsers = data.length;
-    totalLecturers = data.filter(item => item.isLecture === true).length;
-    totalStudents = data.filter(item => item.isStudent === true).length;
-    totalAdmins = data.filter(item => item.isAdmin === true).length;
-    document.getElementById("users_counter").innerHTML = totalUsers.toString();
-    document.getElementById("lecturers_counter").innerHTML = totalLecturers.toString();
-    document.getElementById("students_counter").innerHTML = totalStudents.toString();
-    document.getElementById("admin_counter").innerHTML = totalAdmins.toString();
-}
+    function PopulateTotals(data) {
+        totalUsers = data.length;
+        totalLecturers = data.filter(item => item.isLecture === true).length;
+        totalStudents = data.filter(item => item.isStudent === true).length;
+        totalAdmins = data.filter(item => item.isAdmin === true).length;
+        document.getElementById("users_counter").innerHTML = totalUsers.toString();
+        document.getElementById("lecturers_counter").innerHTML = totalLecturers.toString();
+        document.getElementById("students_counter").innerHTML = totalStudents.toString();
+        document.getElementById("admin_counter").innerHTML = totalAdmins.toString();
+    }
 
-function LogOut() {
-    window.location = '@Url.Action("Index", "Home")';
-}
-function Dashboard() {
-    window.location = '@Url.Action("AdminDashboard", "AdminDashboard")';
-}
-function Reporting() {
-    window.location = '@Url.Action("Index", "AdminReporting")';
-}
-function Analytics() {
-    window.location = '@Url.Action("Index", "AdminAnalytics")';
-}
-function Courses() {
-    window.location = '@Url.Action("Index", "AdminCourses")';
-}
-function Modules() {
-    window.location = '@Url.Action("Index", "AdminModules")';
-}
-function User() {
-    window.location = '@Url.Action("Index", "AdminUsers")';
-}
-function Communication() {
-    window.location = '@Url.Action("Index", "AdminCommunication")';
-}
+    function LogOut() {
+        window.location = '@Url.Action("Index", "Home")';
+    }
+    function Dashboard() {
+        window.location = '@Url.Action("AdminDashboard", "AdminDashboard")';
+    }
+    function Reporting() {
+        window.location = '@Url.Action("Index", "AdminReporting")';
+    }
+    function Analytics() {
+        window.location = '@Url.Action("Index", "AdminAnalytics")';
+    }
+    function Courses() {
+        window.location = '@Url.Action("Index", "AdminCourses")';
+    }
+    function Modules() {
+        window.location = '@Url.Action("Index", "AdminModules")';
+    }
+    function User() {
+        window.location = '@Url.Action("Index", "AdminUsers")';
+    }
+    function Communication() {
+        window.location = '@Url.Action("Index", "AdminCommunication")';
+    }
 </script>
 

@@ -66,5 +66,19 @@ namespace TurboJsMVC.Controllers
                 return BadRequest();
             }
         }
+
+        public ActionResult UsersReport(User user) 
+        {
+            UserReport userReport = new UserReport();
+            byte[] _file = userReport.PrepareReport(GetUsers());
+            return File(_file, "application/pdf");
+        }
+
+        public List<User> GetUsers()
+        {
+            List<User> users = new List<User>();
+            users = _context.Users.ToList();
+            return users;
+        }
     }
 }

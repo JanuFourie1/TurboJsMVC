@@ -1,15 +1,399 @@
-﻿
+﻿@model IEnumerable<TurboJsMVC.Models.User>
 @{
-    Layout = null;
+    Layout = "";
 }
-
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AdminUsers</title>
+    <title>Users - Turbo.Js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
+    <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+  
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .user_header{
+            color: rgba(22,34,57,0.95);
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .ruler{
+            font-weight: 600;
+            margin-left: 10px;
+            margin-right: 0px;
+            color: rgba(22,34,57,0.95);
+        }
+
+        header{
+            position: fixed;
+            background: rgba(22,34,57,0.95);
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+        }
+
+        .left_area h3{
+            color: #f5a425;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .left_area span{
+            color: #ffff
+        }
+
+        .logout_btn{
+            padding: 5px;
+            background-color: #f5a425;
+            text-decoration: none;
+            float: right;
+            margin-top: -30px;
+            margin-right: 40px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.5s;
+            transition-property: background;
+        }
+
+        .logout_btn:hover{
+            background: #f5a425;
+        }
+
+        .sidebar{
+            background: rgba(22,34,57,0.95);
+            margin-top: 70px;
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            transition: 0.5s;
+            transition-property: left;
+        }
+
+        .sidebar .profile_image{
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar h4{
+            color: #ccc;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a{
+            color: #fff;
+            display: block;
+            width: 100%;
+            line-height: 60px;
+            text-decoration: none;
+            padding-left: 40px;
+            box-sizing: border-box;
+        }
+
+        .sidebar a:hover{
+            background: #f5a425;
+        }
+
+        .sidebar i{
+            padding-right: 10px;
+
+        }
+
+        label #sidebar_btn{
+            z-index: 1;
+            color: #fff;
+            position: fixed;
+            cursor: pointer;
+            left: 300px;
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        label #sidebar_btn:hover{
+            color: #f5a425;
+        }
+
+        #check:checked ~ .sidebar{
+            left: -190px;
+        }
+
+        #check:checked ~ .sidebar a span{
+            display: none;
+        }
+
+        #check:checked ~.sidebar a{
+            font-size: 20px;
+            margin-left: 170px;
+            width: 80px;
+        }
+
+        .content{
+            margin-left: 250px;
+            background-position: center;
+            background-size: cover;
+            height: 93vh;
+            max-height: 93vh;
+            overflow: scroll;
+            transition: 0.5s;
+            transform: translateY(70px);
+            padding-right: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #check:checked ~ .content{
+            margin-left: 60px;
+        }
+
+        #check{
+            display: none;
+        }
+
+        .table_container {
+            align-content: center;
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px !important;
+            table-layout: fixed;
+            border-collapse: collapse;
+            max-height: 76vh;
+            overflow-y: scroll;
+        }
+
+        .styled-table {
+            margin-left: 10px;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .styled-table thead tr {
+                background-color: rgba(22,34,57,0.95);
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+
+            .styled-table tbody tr {
+                border-bottom: thin solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid rgba(22,34,57,0.95);
+                }
+
+                li{
+                    list-style-type: none;
+                    border: 1px thin;
+                }
+
+            .page_numbers{
+                display: flex;
+                flex-direction:row;
+                margin-top: 20px;
+                
+            }
+
+            .page_numbers li{
+                margin-right: 10px;
+                transform: translateX(-40px);
+            }
+
+            .inactive{
+                border: 1px solid #f5a425;
+                text-decoration: none;
+                /*background-color: white;*/
+                color: black;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-weight:600;
+            }
+
+            .page_numbers a{
+                text-decoration: none;
+                color: black;
+            }
+
+            .active{
+                background-color: #f5a425;
+                border: 1px solid #f5a425;
+                text-decoration: none;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-weight:600;
+            }
+
+            .tbl_btn{
+                background-color: #f5a425;
+                border: 1px solid #f5a425;
+                cursor: pointer;
+                border-radius: 6px;
+                color: black;
+            }
+    </style>
 </head>
 <body>
+    <input type="checkbox" id="check"/>
+    <!--Header area start-->
+     <header>
+         <label for="check">
+             <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+         </label>
+         <div class="left_area">
+             <h3>Turbo <span>JS</span></h3>
+         </div>
+         <div class="right_area">
+             <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+         </div>
+     </header>
+    <!--Header area end-->
+    <!--Sidebar start-->
+    <div class="sidebar">
+        <center>
+            <img src="~/images/Admin/Dashboard/user.jpg" class="profile_image" alt="User Img" />
+            <h4>Janu Fourie</h4>
+        </center>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+        <a href="#" onclick="Courses()"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
+        <a href="#" onclick="Modules()"><i class="fa-solid fa-book-open"></i> <span>Modules</span></a>
+        <a href="#" onclick="User()"><i class="fa-solid fa-user"></i> <span>Users</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+    </div>
+    <!--Sidebar end-->
+    <div class="content">
+        <div>
+            <h2 class="user_header">User Management</h2>
+        <hr class="ruler"/>
+        </div>
+         <div class="table_container tableFixHead">
+            <table class="styled-table table">
+                <thead>
+                    <tr>
+                        <th>
+                            User Id
+                        </th>
+                        <th>
+                            UserName
+                        </th>
+                        <th>
+                            Email Address
+                        </th>
+                        <th>
+                            Date Joined
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width: 20%;">@item.UserId</td>
+                            <td style="width: 20%;">@item.Username</td>
+                            <td style="width: 20%;">@item.Email</td>
+                            <td style="width: 20%;">@item.DateJoined.ToString("dddd, dd MMMM yy")</td>
+                            <td style="width: 10%;"><button class="tbl_btn"><i class="fa-solid fa-edit"></i></button></td>
+                            <td style="width: 10%;"><button class="tbl_btn"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <ul class="pagination page_numbers">
+                @{
+                    int numberPage = ViewBag.numberPage;
+                    int pageCurrent = ViewBag.pageCurrent;
+                    int i;
+                    for (i = 1; i < numberPage; i++)
+                    {
+                        if (i == pageCurrent)
+                        {
+                                                                                                                    <li class="active"><a href="?page=@i">@i</a></li>
+                        }
+                        else
+                        {
+                                                                                                                    <li class="inactive"><a href="?page=@i">@i</a></li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
+
+<script>
+var totalUsers = 0;
+var totalLecturers = 0;
+var totalStudents = 0;
+var totalAdmins = 0;
+    $( document ).ready(function() {
+        
+       
+    
+    });
+
+
+function LogOut() {
+    window.location = '@Url.Action("Index", "Home")';
+}
+function Dashboard() {
+    window.location = '@Url.Action("AdminDashboard", "AdminDashboard")';
+}
+function Reporting() {
+    window.location = '@Url.Action("Index", "AdminReporting")';
+}
+function Analytics() {
+    window.location = '@Url.Action("Index", "AdminAnalytics")';
+}
+function Courses() {
+    window.location = '@Url.Action("Index", "AdminCourses")';
+}
+function Modules() {
+    window.location = '@Url.Action("Index", "AdminModules")';
+}
+function User() {
+    window.location = '@Url.Action("Index", "AdminUsers")';
+}
+function Communication() {
+    window.location = '@Url.Action("Index", "AdminCommunication")';
+}
+</script>
+

@@ -15,9 +15,29 @@ namespace TurboJsMVC.Controllers
             _toastNotification = toastNotification;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int ? page)
         {
-            return View();
+            List<User> list = new List<User>();
+            var result = _context.Users.ToList();
+            list = result;
+
+            if (page > 0)
+            {
+                page = page;
+            }
+            else
+            {
+                page = 1;
+            }
+            int limit = 10;
+            int start = (int)(page - 1) * limit;
+            int totalData = list.Count();
+            ViewBag.totalHistories = totalData;
+            ViewBag.pageCurrent = page;
+            int numberPage = (totalData / limit);
+            ViewBag.numberPage = numberPage;
+            var dataHistories = list.Skip(start).Take(limit);
+            return View(dataHistories.ToList());
         }
 
         [HttpGet]

@@ -95,8 +95,6 @@ namespace TurboJsMVC.Models
 
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.Property(e => e.Description).HasMaxLength(150);
-
                 entity.Property(e => e.Duration).HasMaxLength(150);
 
                 entity.Property(e => e.Name).HasMaxLength(150);

@@ -30,6 +30,10 @@
      line-height: 1; 
 }
 
+a:hover {
+    color: white;
+}
+
         body{
             margin: 0;
             padding: 0;
@@ -438,7 +442,7 @@
                             <td style="width: 20%;">@item.Username</td>
                             <td style="width: 20%;">@item.Email</td>
                             <td style="width: 20%;">@item.DateJoined.ToString("dddd, dd MMMM yy")</td>
-                            <td style="width: 10%;"><button type="button" data-bs-toggle="modal" data-bs-target="#EditModal" class="btn tbl_btn"><i class="fa-solid fa-edit"></i></button></td>
+                            <td style="width: 10%;"><button onclick="ToggleUserEdit(@item.UserId, '@item.Username', '@item.Email', '@item.IsAdmin','@item.IsLecture', '@item.IsStudent')" type="button" data-bs-toggle="modal" data-bs-target="#EditModal" class="btn tbl_btn"><i class="fa-solid fa-edit"></i></button></td>
                             <td style="width: 10%;"><button class="btn tbl_btn" onclick="DeleteUserValues(@item.UserId, '@item.Username')" type="button" data-bs-toggle="modal" data-bs-target="#DeleteModal"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     }
@@ -453,11 +457,11 @@
                     {
                         if (i == pageCurrent)
                         {
-                                                                                                                                                                                                                                                                                                                                                                            <li class="active"><a href="?page=@i">@i</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <li class="active"><a href="?page=@i">@i</a></li>
                         }
                         else
                         {
-                                                                                                                                                                                                                                                                                <li class="inactive"><a href="?page=@i">@i</a></li>
+                                                                                                                                                                                                                                                                                                                                        <li class="inactive"><a href="?page=@i">@i</a></li>
                         }
                     }
                 }
@@ -471,6 +475,7 @@
 
 <script>
 var UserId = 0;
+var EditUserId = 0;
     $(document).ready(function() {
         });
 
@@ -497,6 +502,49 @@ function DeleteUser() {
             "error": function(response) {
                 if (response.status == 200) {
                     toastr.success("User removed");
+                }else{
+                    toastr.error("Error");
+                }
+            }
+        });
+}
+
+function ToggleUserEdit(userId, username, email, admin, lecture, student){
+    document.getElementById("email_edit").value = email;
+    document.getElementById("username_edit").value = username;
+    document.getElementById("user_edit_name").innerHTML = username;
+    if (admin === 'True') {
+        document.getElementById("role_select").value = "Admin";
+    } else if (lecture === 'True') {
+         document.getElementById("role_select").value = "Lecture";
+    } else {
+         document.getElementById("role_select").value = "Student";
+    }
+    EditUserId = userId;
+}
+
+function EditUser(){
+    var userEmail = document.getElementById("email_edit").value;
+    var userName = document.getElementById("username_edit").value;
+    var userRole = document.getElementById("role_select").value;
+    var Id = EditUserId;
+     $.ajax({
+            "url": "@Url.Action("UpdateUser", "AdminUsers")",
+            "async": true,
+            "type": "PUT",
+            "dataType": "Json",
+            "data": {
+                userId: EditUserId,
+                username: userName,
+                email: userEmail,
+                role: userRole
+            },
+            "success": function(response) {
+                toastr.success("User updated");
+            },
+            "error": function(response) {
+                if (response.status == 200) {
+                    toastr.success("User updated");
                 }else{
                     toastr.error("Error");
                 }

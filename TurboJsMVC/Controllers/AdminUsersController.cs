@@ -88,5 +88,40 @@ namespace TurboJsMVC.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(int userId, string username, string email, string role)
+        {
+            User user = _context.Users.FirstOrDefault(m => m.UserId == userId);
+            user.Username = username;
+            user.Email = email;
+            if(role == "Admin")
+            {
+                user.IsAdmin = true;
+                user.IsLecture = false;
+                user.IsStudent = false;
+            }else if(role == "Lecture")
+            {
+                user.IsAdmin = false;
+                user.IsLecture = true;
+                user.IsStudent = false;
+            }
+            else
+            {
+                user.IsAdmin = false;
+                user.IsLecture = false;
+                user.IsStudent = true;
+            }
+            try
+            {
+                _context.Users.Update(user);
+                _context.SaveChanges();
+                return Ok("User updated");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

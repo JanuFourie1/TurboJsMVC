@@ -25,6 +25,7 @@ namespace TurboJsMVC.Models
         public virtual DbSet<Mark> Marks { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<Module> Modules { get; set; } = null!;
+        public virtual DbSet<RemovedUser> RemovedUsers { get; set; } = null!;
         public virtual DbSet<StudentEnrollment> StudentEnrollments { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -130,6 +131,11 @@ namespace TurboJsMVC.Models
                 entity.Property(e => e.Description).HasMaxLength(150);
 
                 entity.Property(e => e.Name).HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<RemovedUser>(entity =>
+            {
+                entity.Property(e => e.Date).HasColumnType("date");
             });
 
             modelBuilder.Entity<StudentEnrollment>(entity =>

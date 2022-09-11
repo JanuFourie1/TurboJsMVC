@@ -58,5 +58,35 @@ namespace TurboJsMVC.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(int userId, string reason)
+        {
+            try
+            {
+                User user = _context.Users.FirstOrDefault(m => m.UserId == userId);
+                DateTime date = DateTime.Now;
+                RemovedUser removedUser = new RemovedUser();
+                if (user != null)
+                {
+                   var result =  _context.Users.Remove(user);
+                    removedUser.UserId = userId;
+                    removedUser.Reason = reason;
+                    removedUser.Date = date;
+                    _context.RemovedUsers.Add(removedUser);
+                    _context.SaveChanges();
+                    return Ok("User removed");
+                }
+                else
+                {
+                    return NotFound("User not found");
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

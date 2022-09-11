@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace TurboJsMVC.Models
 {
-    public partial class LoginHistory
+    public partial class RemovedUser
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public string Reason { get; set; } = null!;
         public DateTime Date { get; set; }
-        public string Ip { get; set; } = null!;
     }
 }

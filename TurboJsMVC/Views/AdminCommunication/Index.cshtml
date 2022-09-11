@@ -172,12 +172,12 @@
 /* Style the submit button with a specific background color etc */
 input[type=submit] {
   background-color: #f5a425;
-  color: white;
+  color: black;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 /* When moving the mouse over the submit button, add a darker green color */
@@ -258,7 +258,7 @@ input[type=submit]:hover {
                 <label for="message">Message</label>
                 <textarea oninput="MessageChanged(this)" id="message" name="subject" placeholder="Write email content..." style="height:200px" required></textarea>
 
-                <input id="submitEmail" onclick="SendEmail()" type="submit" value="Submit">
+                <input id="submitEmail" onclick="SendEmail()" type="submit" value="Send Email">
                 
     </div>
     </div>

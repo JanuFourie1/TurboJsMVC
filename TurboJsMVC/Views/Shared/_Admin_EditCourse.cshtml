@@ -1,0 +1,29 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Course: <span id="user_edit_name"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Course Name</span>
+            <input id="name_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+            <input id="description_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Duration</span>
+            <input id="duration_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+         </div>
+      <div class="modal-footer">
+        <button onclick="UpdateCourse()" data-bs-dismiss="modal" type="button" class="btn modal_btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

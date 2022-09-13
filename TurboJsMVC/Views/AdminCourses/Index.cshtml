@@ -19,8 +19,6 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  
-
     <style>
         *, ::after, ::before {
     box-sizing:initial;
@@ -385,7 +383,7 @@ a:hover {
     </style>
 </head>
 <body>
-    @{Html.RenderPartial("_Admin_EditUser");}
+    @{Html.RenderPartial("_Admin_EditCourse");}
     <input type="checkbox" id="check"/>
     <!--Header area start-->
      <header>
@@ -417,7 +415,6 @@ a:hover {
     <!--Sidebar end-->
     <div class="content">
         <br />
-        
         <div>
             <h2 class="user_header">Course Management</h2>
         <hr class="ruler"/>
@@ -449,38 +446,9 @@ a:hover {
                     </tr>
                 </thead>
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td style="width: 20%;">@item.Id</td>
-                            <td style="width: 20%;">@item.Name</td>
-                            <td style="width: 20%;">@item.Description</td>
-                            <td style="width: 20%;">@item.Duration</td>
-                            <td style="width: 10%;"><button type="button" data-bs-toggle="modal" data-bs-target="#EditModal" class="btn tbl_btn"><i class="fa-solid fa-edit"></i></button></td>
-                            <td style="width: 10%;"><button onclick="DeleteCourse(@item.Id)" class="btn tbl_btn" type="button" ><i class="fa-solid fa-trash"></i></button></td>
-                        </tr>
-                    }
+                <tbody id="courses_body">
                 </tbody>
             </table>
-            <ul class="pagination page_numbers">
-                @{
-                    int numberPage = ViewBag.numberPage;
-                    int pageCurrent = ViewBag.pageCurrent;
-                    int i;
-                    for (i = 1; i < numberPage + 1; i++)
-                    {
-                        if (i == pageCurrent)
-                        {
-                                                                                <li class="active"><a href="?page=@i">@i</a></li>
-                        }
-                        else
-                        {
-                                                                                <li class="inactive"><a href="?page=@i">@i</a></li>
-                        }
-                    }
-                }
-            </ul>
             <br />
             <hr class="ruler"/>
             <br />
@@ -514,8 +482,40 @@ a:hover {
 <script>
 var UserId = 0;
 var EditUserId = 0;
+var CourseId = 0;
     $(document).ready(function() {
+        GetCourses();
         });
+
+function GetCourses() {
+    $.ajax({
+            "url": "@Url.Action("GetCourses", "AdminCourses")",
+            "async": true,
+            "type": "DELETE",
+            "dataType": "Json",
+            "success": function(response) {
+                PopulateTable(response);
+            },
+            "error": function(response) {
+                    toastr.error("Error fetching courses");
+            }
+        });
+}
+
+function PopulateTable(courses) {
+     var html = '';
+        for (var course of courses) {
+            html += '<tr>';
+            html += '<td>' + course.id+ '</td>';
+            html += '<td>' + course.name+ '</td>';
+            html += '<td>' + course.description + '</td>';
+            html += '<td>' + course.duration+ '</td>';
+            html += '<td><button onclick="EditCourseDetails(' + course.id + ')" type="button" data-bs-toggle="modal" data-bs-target="#EditModal" class="btn tbl_btn"><i class="fa-solid fa-edit"></i></button></td>';
+            html += '<td><button onclick="DeleteCourse(' + course.id + ')" class="btn tbl_btn" type="button" ><i class="fa-solid fa-trash"></i></button>';
+            html += '</tr>';
+        }
+        $('#courses_body').html(html);
+}
 
 function FilterTable() {
   // Declare variables
@@ -540,6 +540,24 @@ function FilterTable() {
   }
 }
 
+function EditCourseDetails(id) {
+    CourseId = id;
+    $.ajax({
+            "url": "@Url.Action("GetCourse", "AdminCourses")",
+            "async": true,
+            "type": "GET",
+            "dataType": "Json",
+            "data": {
+                courseId: id
+                },
+            "success": function(response) {
+                document.getElementById("name_edit").value = response.name;
+    document.getElementById("description_edit").value = response.description;
+    document.getElementById("duration_edit").value = response.duration;
+            }
+        });
+}
+
 function DeleteCourse(id) {
     $.ajax({
             "url": "@Url.Action("DeleteCourse", "AdminCourses")",
@@ -550,13 +568,43 @@ function DeleteCourse(id) {
                 courseId: id
             },
             "success": function(response) {
-               window.location.reload();
                 toastr.success("Course removed");
+                GetCourses();
             },
             "error": function(response) {
                 if (response.status == 200) {
-                    window.location.reload();
                     toastr.success("Course removed");
+                    GetCourses();
+                }else{
+                    toastr.error("Error");
+                }
+            }
+        });
+}
+
+function UpdateCourse() {
+    var course_name = document.getElementById("name_edit").value;
+    var course_desription = document.getElementById("description_edit").value;
+    var course_duration = document.getElementById("duration_edit").value;
+    $.ajax({
+            "url": "@Url.Action("UpdateCourse", "AdminCourses")",
+            "async": true,
+            "type": "PUT",
+            "dataType": "Json",
+            "data": {
+                courseId: CourseId,
+                name: course_name,
+                description: course_desription,
+                duration: course_duration
+            },
+            "success": function(response) {
+                toastr.success("Course updated");
+                GetCourses();
+            },
+            "error": function(response) {
+                if (response.status == 200) {
+                    toastr.success("Course updated");
+                    GetCourses()
                 }else{
                     toastr.error("Error");
                 }

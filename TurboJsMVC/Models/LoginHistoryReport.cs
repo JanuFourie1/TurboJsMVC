@@ -1,11 +1,9 @@
-﻿
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using System.Web;
 
 namespace TurboJsMVC.Models
 {
-    public class UserReport
+    public class LoginHistoryReport
     {
         int _totalColumn = 4;
         Document _document;
@@ -13,11 +11,11 @@ namespace TurboJsMVC.Models
         PdfPTable _pdfTable = new PdfPTable(4);
         PdfPCell _pdfPCell;
         MemoryStream _memoryStream = new MemoryStream();
-        List<User> _users = new List<User>();
+        List<LoginHistoryCustom> _history = new List<LoginHistoryCustom>();
 
-        public byte[] PrepareReport(List<User> users)
+        public byte[] PrepareReport(List<LoginHistoryCustom> histories)
         {
-            _users = users;
+            _history = histories;
 
 
             #region
@@ -29,7 +27,7 @@ namespace TurboJsMVC.Models
             _fontStyle = FontFactory.GetFont("Tahoma", 8f, 1);
             PdfWriter.GetInstance(_document, _memoryStream);
             _document.Open();
-            _pdfTable.SetWidths(new float[] { 20f, 140f, 100f, 100f });
+            _pdfTable.SetWidths(new float[] { 70f, 140f, 100f, 60f });
             #endregion
 
             this.ReportHeader();
@@ -53,7 +51,7 @@ namespace TurboJsMVC.Models
             _pdfTable.CompleteRow();
 
             _fontStyle = FontFactory.GetFont("Tahoma", 9f, 1);
-            _pdfPCell = new PdfPCell(new Phrase("Users List", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Login History List", _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.Border = 0;
@@ -68,14 +66,7 @@ namespace TurboJsMVC.Models
         {
             #region Table Header
             _fontStyle = FontFactory.GetFont("Tahoma", 8f, 1);
-            _pdfPCell = new PdfPCell(new Phrase("UserId", _fontStyle));
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            _pdfPCell.ExtraParagraphSpace = 0;
-            _pdfTable.AddCell(_pdfPCell);
-
-            _pdfPCell = new PdfPCell(new Phrase("Name", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("UserName", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
@@ -89,7 +80,14 @@ namespace TurboJsMVC.Models
             _pdfPCell.ExtraParagraphSpace = 0;
             _pdfTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase("Date Joined", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Date", _fontStyle));
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            _pdfPCell.ExtraParagraphSpace = 0;
+            _pdfTable.AddCell(_pdfPCell);
+
+            _pdfPCell = new PdfPCell(new Phrase("IP Address", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
@@ -100,30 +98,30 @@ namespace TurboJsMVC.Models
 
             #region Table Body
             _fontStyle = FontFactory.GetFont("Tahoma", 8f, 0);
-            foreach(User user in _users)
+            foreach (LoginHistoryCustom history in _history)
             {
-                _pdfPCell = new PdfPCell(new Phrase(user.UserId.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(history.Username, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPCell.ExtraParagraphSpace = 0;
                 _pdfTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(user.Username.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(history.Email, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPCell.ExtraParagraphSpace = 0;
                 _pdfTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(user.Email.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(history.Date, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPCell.ExtraParagraphSpace = 0;
                 _pdfTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(user.DateJoined.ToString("dddd, dd MMMM yy"), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(history.Ip, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;

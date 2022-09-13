@@ -123,5 +123,11 @@ namespace TurboJsMVC.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult>GetUser(int userId)
+        {
+            var result = _context.Users.FirstOrDefault(x => x.UserId == userId);
+            return Ok(result);
+        }
     }
 }

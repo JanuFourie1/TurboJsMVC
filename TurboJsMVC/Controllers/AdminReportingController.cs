@@ -67,7 +67,45 @@ namespace TurboJsMVC.Controllers
             }
         }
 
-        public ActionResult UsersReport(User user) 
+        public async Task<IActionResult> LoginHistoryReport()
+        {
+            LoginHistoryReport historyReport = new LoginHistoryReport();
+            byte[] _file = historyReport.PrepareReport(GetLoginHistories());
+            return File(_file, "application/pdf");
+        }
+
+        public List<LoginHistoryCustom> GetLoginHistories()
+        {
+            List<LoginHistoryCustom> list = new List<LoginHistoryCustom>();
+            var result = _context.LoginHistories.ToList();
+            result = result.OrderByDescending(x => x.Id).ToList();
+            var users = _context.Users.ToList();
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                var userString = "";
+                var emailString = "";
+                for (var j = 0; j < users.Count; j++)
+                {
+
+                    if (users[j].UserId == result[i].UserId)
+                    {
+                        userString = users[j].Username;
+                        emailString = users[j].Email;
+                    }
+                }
+                list.Add(new LoginHistoryCustom
+                {
+                    Username = userString,
+                    Email = emailString,
+                    Ip = result[i].Ip,
+                    Date = result[i].Date.ToString("dddd, dd MMMM yy")
+                });
+            }
+            return list;
+        }
+
+        public async Task<IActionResult> UsersReport(User user) 
         {
             UserReport userReport = new UserReport();
             byte[] _file = userReport.PrepareReport(GetUsers());
@@ -78,6 +116,7 @@ namespace TurboJsMVC.Controllers
         {
             List<User> users = new List<User>();
             users = _context.Users.ToList();
+            users = users.OrderByDescending(x => x.DateJoined).ToList();
             return users;
         }
     }

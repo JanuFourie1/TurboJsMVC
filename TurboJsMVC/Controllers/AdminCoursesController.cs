@@ -68,5 +68,31 @@ namespace TurboJsMVC.Controllers
             }
             
         }
+
+        public async Task<IActionResult> GetCourses() { 
+            List<Course> courses = new List<Course>();
+            courses = _context.Courses.ToList();
+            courses = courses.OrderByDescending(x => x.Id).ToList();
+            return Ok(courses);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCourse(int courseId)
+        {
+            var result = _context.Courses.FirstOrDefault(x => x.Id == courseId);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCourse(int courseId, string name, string description, string duration)
+        {
+            Course course = _context.Courses.FirstOrDefault(m => m.Id== courseId);
+            course.Name = name;
+            course.Description = description;
+            course.Duration = duration;
+            _context.Courses.Update(course);
+            _context.SaveChanges();
+            return Ok("Course updated");
+        }
     }
 }

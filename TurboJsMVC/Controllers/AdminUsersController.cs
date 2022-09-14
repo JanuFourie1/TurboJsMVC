@@ -129,5 +129,19 @@ namespace TurboJsMVC.Controllers
             var result = _context.Users.FirstOrDefault(x => x.UserId == userId);
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetLectures()
+        {
+            try
+            {
+                var result =  _context.Users.Where(x => x.IsLecture == true).ToList();
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }

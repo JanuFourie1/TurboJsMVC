@@ -50,6 +50,7 @@ namespace TurboJsMVC.Controllers
                 }
                 adminModules.Add(new AdminModules
                 {
+                    Id = modules[i].Id,
                     Name = modules[i].Name,
                     Description = modules[i].Description,
                     Course = course.Name,
@@ -58,6 +59,56 @@ namespace TurboJsMVC.Controllers
             }
 
             return Ok(adminModules);
+        }
+
+        public async Task<IActionResult> AddModule(Module module)
+        {
+            try
+            {
+                _context.Modules.Add(module);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "AdminModules");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteModule(int moduleId)
+        {
+            try
+            {
+                Module module = _context.Modules.FirstOrDefault(x => x.Id == moduleId);
+                _context.Modules.Remove(module);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetModule(int itemId)
+        {
+            var module = _context.Modules.FirstOrDefault(x => x.Id == itemId);
+            return Ok(module);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateModule(int module, string description, string name, int course, int lecture)
+        {
+            Module item = _context.Modules.FirstOrDefault(m => m.Id == module);
+            item.Name = name;
+            item.Description = description;
+            item.CourseId = course;
+            item.LectureId = lecture;
+            _context.Modules.Update(item);
+            _context.SaveChanges();
+            return Ok("Module updated");
         }
     }
 }

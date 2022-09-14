@@ -12,8 +12,9 @@ namespace TurboJsMVC.Controllers.Student
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult StudentCourse()
         {
+            ViewData["Courses"] = GetCourses();
             return View();
         }
 

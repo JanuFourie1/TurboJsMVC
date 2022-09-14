@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TurboJsMVC.Models;
 
-namespace TurboJsMVC.Controllers.Student
+namespace TurboJsMVC.Controllers
 {
     public class StudentDashboardController : Controller
     {
@@ -29,6 +29,6 @@ namespace TurboJsMVC.Controllers.Student
             List<Course> courses = new List<Course>(_context.Courses);
             return courses;
         }
-        
+
     }
 }

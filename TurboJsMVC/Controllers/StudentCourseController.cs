@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TurboJsMVC.Models;
 
-namespace TurboJsMVC.Controllers.Student
+namespace TurboJsMVC.Controllers
 {
     public class StudentCourseController : Controller
     {

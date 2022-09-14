@@ -1,0 +1,53 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update User: <span id="user_edit_name"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">User Name</span>
+            <input id="username_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            <input id="email_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+  <label class="input-group-text" for="inputGroupSelect01">Role</label>
+  <select class="form-select" id="role_select">
+    <option value="Student">Student</option>
+    <option value="Lecture">Lecture</option>
+    <option value="Admin">Admin</option>
+  </select>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="EditUser()" data-bs-dismiss="modal" type="button" class="btn modal_btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remove User: <span id="user_delete_name"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="input-group mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-default">Reason</span>
+  <input id="delete_user_reason" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+</div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="DeleteUser()" type="button" data-bs-dismiss="modal" class="btn modal_btn">Disable Access</button>
+      </div>
+    </div>
+  </div>
+</div>

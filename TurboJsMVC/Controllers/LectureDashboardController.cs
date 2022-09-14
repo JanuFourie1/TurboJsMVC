@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TurboJsMVC.Controllers.Lecture
+namespace TurboJsMVC.Controllers
 {
     public class LectureDashboardController : Controller
     {

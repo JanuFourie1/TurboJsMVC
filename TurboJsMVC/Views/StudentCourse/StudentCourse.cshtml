@@ -1,7 +1,7 @@
 ﻿@using TurboJsMVC;
 @{
-    Layout = null;
     Layout = "";
+    IEnumerable<Course> courses = ViewData["Courses"] as IEnumerable<Course>;
 }
 
 <!DOCTYPE html>
@@ -10,8 +10,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Student Dashboard</title>
-    <title>Dashboard - Turbo.Js</title>
+    <title>Course</title>
+    <title>Course - Turbo.Js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
  <style>
@@ -231,26 +231,9 @@
 </head>
 <body>
     @{
-        IEnumerable<User> users = ViewData["Users"] as IEnumerable<User>;
         IEnumerable<Course> courses = ViewData["Courses"] as IEnumerable<Course>;
-        var lectureCount = 0;
-        var courseCount = 0;
-        var studentReg = 0;
     }
-    @foreach(User user in users){
-        if(user.IsLecture == true)
-        {
-            lectureCount += 1;
-        }
-        if(user.IsStudent == true)
-        {
-            studentReg += 1;
-        }
-    }
-    @foreach(Course course in courses)
-    {
-        courseCount += 1;
-    }
+   
 
     <input type="checkbox" id="check"/>
     <!--Header area start-->
@@ -281,24 +264,11 @@
     <!--Sidebar end-->
 
     <div class="content">
-      <div class="counter_container">
-            
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-book"></i> Courses</h2>
-                <h2>@courseCount</h2>
-            </div>
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-briefcase"></i> Lecturers</h2>
-                <h2>@lectureCount</h2>
-            </div>
-            <div class="counter_card">
-                <h2><i class="fa-solid fa-graduation-cap"></i> Students</h2>
-                <h2>@studentReg</h2>
-            </div>
+      
     </div>
     <div>
         <video>
-            <source src="" />
+            <source src="https://youtu.be/1SZle1skb84" />
         </video>
     </div>
 </body>

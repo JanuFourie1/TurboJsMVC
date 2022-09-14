@@ -29,9 +29,5 @@ namespace TurboJsMVC.Controllers
             List<Course> courses = new List<Course>(_context.Courses);
             return courses;
         }
-        public IActionResult StudentDashboard()
-        {
-            return View();
-        }
     }
 }

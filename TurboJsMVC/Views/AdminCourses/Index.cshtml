@@ -380,6 +380,10 @@ a:hover {
 .course-submission label{
     color: white;
 }
+
+.search-container{
+    width: 200px;
+}
     </style>
 </head>
 <body>
@@ -419,7 +423,7 @@ a:hover {
             <h2 class="user_header">Course Management</h2>
         <hr class="ruler"/>
         <br />
-        <div class="input-group mb-3 search">
+        <div class="input-group mb-3 search search-container">
 			<div class="input-group-append"><button class="btn btn-primary modal_btn" onclick="FilterTable()"><i class="fas fa-search search_icon"></i></button></div>
             <input id="searchValue" type="text" class="form-control" placeholder="Course Name">
 		</div>
@@ -429,9 +433,6 @@ a:hover {
             <table class="styled-table table" id="dataTable">
                 <thead>
                     <tr>
-                        <th>
-                           Course Id
-                        </th>
                         <th>
                             Name
                         </th>
@@ -506,7 +507,6 @@ function PopulateTable(courses) {
      var html = '';
         for (var course of courses) {
             html += '<tr>';
-            html += '<td>' + course.id+ '</td>';
             html += '<td>' + course.name+ '</td>';
             html += '<td>' + course.description + '</td>';
             html += '<td>' + course.duration+ '</td>';

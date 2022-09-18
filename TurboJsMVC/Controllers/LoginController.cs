@@ -82,6 +82,10 @@ namespace TurboJsMVC.Controllers
             {
                 try
                 {
+                    var studNumber = 0;
+                    var usersResult = _context.Users.ToList();
+                    var length = usersResult.Count();
+                    studNumber = (int)(usersResult[length - 1].StudentNumber + 1);
                     User list = new User();
                     list.Username = user.UserName;
                     list.Email = user.Email;
@@ -90,6 +94,8 @@ namespace TurboJsMVC.Controllers
                     list.IsAdmin = false;
                     list.IsLecture = false;
                     list.IsStudent = true;
+                    list.IsDeleted = false;
+                    list.StudentNumber = studNumber;
                     _context.Users.Add(list);
                     var result = await _context.SaveChangesAsync();
                     if (result > 0)

@@ -367,6 +367,10 @@ a:hover {
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: black;
 }
+
+.search-container{
+    width: 200px;
+}
     </style>
 </head>
 <body>
@@ -407,7 +411,7 @@ a:hover {
             <h2 class="user_header">User Management</h2>
         <hr class="ruler"/>
         <br />
-        <div class="input-group mb-3 search">
+        <div class="input-group mb-3 search search-container">
 			<div class="input-group-append"><button class="btn btn-primary modal_btn" onclick="FilterTable()"><i class="fas fa-search search_icon"></i></button></div>
             <input id="searchValue" type="text" class="form-control" placeholder="Username">
 		</div>
@@ -417,9 +421,6 @@ a:hover {
             <table class="styled-table table" id="dataTable">
                 <thead>
                     <tr>
-                        <th>
-                            User Id
-                        </th>
                         <th>
                             UserName
                         </th>
@@ -474,7 +475,6 @@ function PopulateUsers(users){
     var html = '';
         for (var user of users) {
             html += '<tr>';
-            html += '<td>' + user.userId+ '</td>';
             html += '<td>' + user.username+ '</td>';
             html += '<td>' + user.email + '</td>';
             html += '<td>' + user.dateJoined + '</td>';

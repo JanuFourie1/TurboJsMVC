@@ -384,6 +384,10 @@ a:hover {
 .form-select{
     min-width: 100%;
 }
+
+.search-container{
+    width: 200px;
+}
     </style>
 </head>
 <body>
@@ -423,7 +427,7 @@ a:hover {
             <h2 class="user_header">Module Management</h2>
         <hr class="ruler"/>
         <br />
-        <div class="input-group mb-3 search">
+        <div class="input-group mb-3 search search-container">
 			<div class="input-group-append"><button class="btn btn-primary modal_btn" onclick="FilterTable()"><i class="fas fa-search search_icon"></i></button></div>
             <input id="searchValue" type="text" class="form-control" placeholder="Module Name">
 		</div>

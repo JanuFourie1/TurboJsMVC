@@ -45,12 +45,23 @@ namespace TurboJsMVC.Controllers
         {
             try
             {
+                List<CustomUser> list = new List<CustomUser>();
                 var users = _context.Users.ToList();
                 if (null == users || users.Count < 1)
                 {
                     return BadRequest(users);
                 }
-                return Ok(users);
+                foreach(var user in users)
+                {
+                    list.Add(new CustomUser
+                    {
+                        Username = user.Username,
+                        Email = user.Email,
+                        UserId = user.UserId,
+                        DateJoined = user.DateJoined.ToString("dddd, dd MMMM yy")
+                    });
+                }
+                return Ok(list);
             }
             catch
             {

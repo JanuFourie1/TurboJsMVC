@@ -11,7 +11,7 @@ namespace TurboJsMVC.Controllers
         {
             _context = context;
         }
-
+        [HttpGet]
         public IActionResult StudentCourse()
         {
             ViewData["Courses"] = GetCourses();

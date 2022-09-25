@@ -1,19 +1,17 @@
-﻿@using TurboJsMVC;
+﻿@using TurboJsMVC
 @{
-    Layout = "";
-    IEnumerable<Course> courses = ViewData["Courses"] as IEnumerable<Course>;
+    IEnumerable<Class> classes = ViewData["Classes"] as IEnumerable<Class>;
 }
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Course - Turbo.Js</title>
-    <title>Course - Turbo.Js</title>
+    <title>Class - Turbo.Js</title>
+    <title>Class - Turbo.Js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")"/>
- <style>
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")" />
+    <style>
         *, ::after, ::before {
             box-sizing: initial;
         }
@@ -378,22 +376,22 @@
         .form-select {
             min-width: 100%;
         }
- </style>
+    </style>
 </head>
 <body>
-    <input type="checkbox" id="check"/>
+    <input type="checkbox" id="check" />
     <!--Header area start-->
-     <header>
-         <label for="check">
-             <i class="fa-solid fa-bars" id="sidebar_btn"></i>
-         </label>
-         <div class="left_area">
-             <h3>Turbo <span>JS</span></h3>
-         </div>
-         <div class="right_area">
-             <a asp-controller="home" asp-action="Index" class="logout_btn">Logout</a>
-         </div>
-     </header>
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a asp-controller="home" asp-action="Index" class="logout_btn">Logout</a>
+        </div>
+    </header>
     <!--Header area end-->
     <!--Sidebar start-->
     <div class="sidebar">
@@ -408,64 +406,53 @@
         <a href="#"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
     </div>
     <!--Sidebar end-->
-
     <div class="content">
         <br />
-            <h2 class="user_header"><i class="fa-solid fa-book"></i> Course Enrollment</h2>
-            <hr class="ruler" />
+        <h2 class="user_header"><i class="fa-solid fa-hourglass"></i> Classes</h2>
+        <hr class="ruler" />
         <br />
-            <div class="table_container tableFixHead">
-                <table class="styled-table table">
-                    <thead>
+        <div class="table_container tableFixHead">
+            <table class="styled-table table">
+                <thead>
+                    <tr>
+                        <th>
+                            Module ID
+                        </th>
+                        <th>
+                            Day
+                        </th>
+                        <th>
+                            Start Time 
+                        </th>
+                        <th>
+                            End Time
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (Class classe in classes)
+                    {
                         <tr>
-                            <th>
-                                Course
-                            </th>
-                            <th>
-                                Description
-                            </th>
-                            <th>
-                                Duration
-                            </th>
-                            <th>
-
-                            </th>
+                            <td>
+                                @classe.ModuleId
+                            </td>
+                            <td>
+                                @classe.Day
+                            </td>
+                            <td>
+                                @classe.TimeStart
+                            </td>
+                            <td>
+                                @classe.TimeEnd
+                            </td>
                         </tr>
-                    </thead>
+                    }
+                </tbody>
+            </table>
 
-                    <tbody>
-                        @foreach (Course course in courses)
-                        {
-                            <tr>
-                                <td>
-                                    @course.Name
-                                </td>
-                                <td>
-                                    @course.Description
-                                </td>
-                                <td>
-                                    @course.Duration
-                                </td>
-                                <td>
-                                    <input type="submit" class="btn modal_btn"style="color: white" value="Enrol" >
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-      
-    </div>
-        <div>
-            <h2><i class="fa-solid fa-video-camera"></i> Why Enrol?</h2>
-            <iframe 
-                width="100%" 
-                height="500" src="https://www.youtube.com/embed/HndV87XpkWg" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
         </div>
-    
+    </div>
+
 </body>
 </html>

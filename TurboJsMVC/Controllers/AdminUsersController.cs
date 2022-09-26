@@ -58,7 +58,11 @@ namespace TurboJsMVC.Controllers
                         Username = user.Username,
                         Email = user.Email,
                         UserId = user.UserId,
-                        DateJoined = user.DateJoined.ToString("dddd, dd MMMM yy")
+                        DateJoined = user.DateJoined.ToString("dddd, dd MMMM yy"),
+                        IsAdmin = user.IsAdmin,
+                        IsLecture = user.IsLecture,
+                        IsStudent = user.IsStudent,
+                        StudentNumber = (int)user.StudentNumber
                     });
                 }
                 return Ok(list);

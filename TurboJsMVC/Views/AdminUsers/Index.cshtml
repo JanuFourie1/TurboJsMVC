@@ -371,6 +371,11 @@ a:hover {
 .search-container{
     width: 200px;
 }
+
+.table_container{
+    max-height: 70%;
+    overflow-y: scroll;
+}
     </style>
 </head>
 <body>
@@ -428,6 +433,9 @@ a:hover {
                             Email Address
                         </th>
                         <th>
+                            Student Number
+                        </th>
+                        <th>
                             Date Joined
                         </th>
                         <th></th>
@@ -477,6 +485,7 @@ function PopulateUsers(users){
             html += '<tr>';
             html += '<td>' + user.username+ '</td>';
             html += '<td>' + user.email + '</td>';
+            html += '<td>' + user.studentNumber + '</td>';
             html += '<td>' + user.dateJoined + '</td>';
             html += '<td><button onclick="ToggleUserEdit(' + user.userId + ')" type="button" data-bs-toggle="modal" data-bs-target="#EditModal" class="btn tbl_btn"><i class="fa-solid fa-edit"></i></button></td>';
             html += '<td><button class="btn tbl_btn" onclick="DeleteUserValues(' +  user.userId + ')" type="button" data-bs-toggle="modal" data-bs-target="#DeleteModal"><i class="fa-solid fa-trash"></i></button>';

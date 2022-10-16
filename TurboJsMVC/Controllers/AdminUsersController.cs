@@ -65,6 +65,8 @@ namespace TurboJsMVC.Controllers
                         StudentNumber = (int)user.StudentNumber
                     });
                 }
+                SortByName sortByName = new SortByName();
+                list.Sort(sortByName);
                 return Ok(list);
             }
             catch

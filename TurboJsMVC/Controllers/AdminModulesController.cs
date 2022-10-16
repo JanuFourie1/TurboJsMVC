@@ -57,7 +57,8 @@ namespace TurboJsMVC.Controllers
                     Lecture = user.Username
                 });
             }
-
+            SortModulesByName sortByName = new SortModulesByName();
+            adminModules.Sort(sortByName);
             return Ok(adminModules);
         }
 

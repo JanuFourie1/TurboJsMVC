@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<TurboJsMVC.Models.Course>
 @{
     Layout = "";
 }
@@ -221,7 +221,28 @@
     </style>
 </head>
 <body>
-
+    @{
+        IEnumerable<User> users = ViewData["Users"] as IEnumerable<User>;
+        IEnumerable<Module> modules = ViewData["Modules"] as IEnumerable<Module>;
+        var moduleCount = 0;
+        var studentCount = 0;
+        var lectureCount = 0;
+    }
+    @foreach (User user in users)
+    {
+        if (user.IsLecture == true)
+        {
+            lectureCount += 1;
+        }
+        if (user.IsStudent == true)
+        {
+            studentCount += 1;
+        }
+    }
+    @foreach (Module module in modules)
+    {
+        moduleCount += 1;
+    }
     <input type="checkbox" id="check" />
     <!--Header area start-->
     <header>
@@ -241,13 +262,62 @@
         <center>
             <h4>Somila Lefume</h4>
         </center>
-        <a href="#"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
-        <a href="#" ><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-        <a href="#"><i class="fa-solid fa-chart-pie"></i> <span>Assessments</span></a>
-        <a href="#" ><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
-        <a href="#" ><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
-        <a href="#" ><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
-        <a href="#"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+        <a asp-controller="LectureDashboard" asp-action="LectureDashboard"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a asp-controller="LectureReporting" asp-action="LectureReporting"><i class="fa-solid fa-desktop"></i> <span>Reporting</span></a>
+        <a asp-controller="LectureAssessments" asp-action="LectureAssessments"><i class="fa-solid fa-desktop"></i> <span>Assessments</span></a>
+        <a asp-controller="LectureUploadFiles" asp-action="LectureUploadFiles"><i class="fa-solid fa-desktop"></i> <span>Upload Files</span></a>
+        <a asp-controller="LectureClasses" asp-action="LectureClasses"><i class="fa-solid fa-desktop"></i> <span>Classes</span></a>
+        <a asp-controller="LectureAttendance" asp-action="LectureAttendance"><i class="fa-solid fa-desktop"></i> <span>Attendance</span></a>
+        <a asp-controller="LectureCommunication" asp-action="LectureCommunication"><i class="fa-solid fa-desktop"></i> <span>Communication</span></a>
     </div>
+    <!--Sidebar end-->
+    <div class="content">
+        <div class="counter_container">
+            <div class="counter_card">
+                <h2><i class="fa-solid fa-user"></i> My Modules</h2>
+                <h2>@moduleCount</h2>
+            </div>
+            <div class="counter_card">
+                <h2><i class="fa-solid fa-cogs"></i> Total Modules</h2>
+                <h2>@moduleCount</h2>
+            </div>
+            <div class="counter_card">
+                <h2><i class="fa-solid fa-briefcase"></i> Total Students</h2>
+                <h2>@studentCount</h2>
+            </div>
+            </div>
+           
+        </div>
+        <div class="table_container tableFixHead">
+            <table class="styled-table table">
+                <thead>
+                    <tr>
+                        <th>
+                           #
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width: 25%;">@item.Id</td>
+                            <td style="width: 25%;">@item.Name</td>
+                            <td style="width: 25%;">@item.Description</td>
+                          
+                        </tr>
+                    }
+                   
+                </tbody>
+            </table>
+            </div>
 </body>
 </html>

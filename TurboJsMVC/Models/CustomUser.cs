@@ -10,5 +10,6 @@
         public bool IsLecture { get; set; }
         public bool IsStudent { get; set; }
         public int StudentNumber { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }

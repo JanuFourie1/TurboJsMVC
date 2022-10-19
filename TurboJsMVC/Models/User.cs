@@ -15,5 +15,6 @@ namespace TurboJsMVC.Models
         public bool IsStudent { get; set; }
         public int? StudentNumber { get; set; }
         public bool? IsDeleted { get; set; }
+        public int? Department { get; set; }
     }
 }

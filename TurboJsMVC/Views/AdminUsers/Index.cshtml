@@ -480,6 +480,7 @@ function GetUsers() {
 }
 
 function PopulateUsers(users){
+    users = users.filter(x => x.isDeleted === false);
     var html = '';
         for (var user of users) {
             html += '<tr>';
@@ -496,7 +497,6 @@ function PopulateUsers(users){
 
 function DeleteUserValues(userId){
         UserId = userId;
-        console.log(UserId)
 }
 
 function DeleteUser() {
@@ -540,6 +540,12 @@ function ToggleUserEdit(id){
                 document.getElementById("email_edit").value = response.email;
     document.getElementById("username_edit").value = response.username;
     document.getElementById("user_edit_name").innerHTML = response.username;
+                if (response.department == null || response.department == "") {
+                    document.getElementById("department_select").value = "";
+                } else {
+                    document.getElementById("department_select").value = response.department;
+                }
+    
                 console.log(response);
     if (response.isAdmin === true) {
         document.getElementById("role_select").value = "Admin";
@@ -558,6 +564,7 @@ function EditUser(){
     var userEmail = document.getElementById("email_edit").value;
     var userName = document.getElementById("username_edit").value;
     var userRole = document.getElementById("role_select").value;
+    var userDepartment = document.getElementById("department_select").value;
     var Id = EditUserId;
      $.ajax({
             "url": "@Url.Action("UpdateUser", "AdminUsers")",
@@ -568,7 +575,8 @@ function EditUser(){
                 userId: EditUserId,
                 username: userName,
                 email: userEmail,
-                role: userRole
+                role: userRole,
+                department: userDepartment
             },
             "success": function(response) {
                 toastr.success("User updated");

@@ -62,7 +62,8 @@ namespace TurboJsMVC.Controllers
                         IsAdmin = user.IsAdmin,
                         IsLecture = user.IsLecture,
                         IsStudent = user.IsStudent,
-                        StudentNumber = (int)user.StudentNumber
+                        StudentNumber = (int)user.StudentNumber,
+                        IsDeleted = user.IsDeleted
                     });
                 }
                 SortByName sortByName = new SortByName();
@@ -85,7 +86,8 @@ namespace TurboJsMVC.Controllers
                 RemovedUser removedUser = new RemovedUser();
                 if (user != null)
                 {
-                   var result =  _context.Users.Remove(user);
+                    user.IsDeleted = true;
+                    _context.Users.Update(user);
                     removedUser.UserId = userId;
                     removedUser.Reason = reason;
                     removedUser.Date = date;
@@ -106,11 +108,12 @@ namespace TurboJsMVC.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(int userId, string username, string email, string role)
+        public async Task<IActionResult> UpdateUser(int userId, string username, string email, string role, int department)
         {
             User user = _context.Users.FirstOrDefault(m => m.UserId == userId);
             user.Username = username;
             user.Email = email;
+            user.Department = department;
             if(role == "Admin")
             {
                 user.IsAdmin = true;

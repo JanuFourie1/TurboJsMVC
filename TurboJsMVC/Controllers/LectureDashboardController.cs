@@ -12,7 +12,8 @@ namespace TurboJsMVC.Controllers
             _context = context;
             
         }
-        public IActionResult LecturerDashboard()
+
+        public IActionResult LectureDashboard()
         {
             ViewData["Users"] = GetUsers();
             ViewData["Courses"] = GetModules();

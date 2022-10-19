@@ -24,6 +24,14 @@
     box-sizing:initial;
 }
 
+#submit-module{
+    float: right;
+}
+
+.add_btn{
+    margin-left: 10px;
+}
+
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
      line-height: 1; 
 }
@@ -392,6 +400,7 @@ a:hover {
 </head>
 <body>
     @{Html.RenderPartial("_Admin_Modules");}
+    @{Html.RenderPartial("_Admin_AddModule");}
     <input type="checkbox" id="check"/>
     <!--Header area start-->
      <header>
@@ -431,6 +440,7 @@ a:hover {
 			<div class="input-group-append"><button class="btn btn-primary modal_btn" onclick="FilterTable()"><i class="fas fa-search search_icon"></i></button></div>
             <input id="searchValue" type="text" class="form-control" placeholder="Module Name">
 		</div>
+        <button data-bs-toggle="modal" data-bs-target="#AddModal" class="btn modal_btn add_btn">Add Module</button>
         <br />
         </div>
          <div class="table_container tableFixHead">
@@ -458,43 +468,6 @@ a:hover {
                 </tbody>
             </table>
             <br />
-            <hr class="ruler"/>
-            <br />
-            <div class="course-submission">
-                <form action="@Url.Action("AddModule", "AdminModules")" class="form-course" id="form">
-
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-    <label for="exampleFormControlInput1">Name</label>
-    <input name="Name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Course Name" required>
-  </div>
-  <div class="form-group">
-      <br />
-    <label for="exampleFormControlTextarea1">Description</label>
-    <br />
-    <textarea name="Description" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Course Description" required></textarea>
-  </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-    <label for="exampleFormControlInput1">Course</label>
-    <select name="CourseId" class="form-select" id="course_select" required>
-  </select>
-  </div>
-  <br />
- <div class="form-group">
-    <label for="exampleFormControlInput1">Lecture</label>
-    <select name="LectureId" class="form-select" id="lecture_select" required>
-  </select>
-  </div>
-    </div>
-  </div>
-  <br />
-  <button type="submit" data-bs-dismiss="modal" class="btn modal_btn">Add Module</button>
-</form>
-            </div>
             
         </div>
     </div>

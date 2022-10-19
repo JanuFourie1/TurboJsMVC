@@ -20,6 +20,7 @@ namespace TurboJsMVC.Models
         public virtual DbSet<Attendence> Attendences { get; set; } = null!;
         public virtual DbSet<Class> Classes { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
+        public virtual DbSet<Department> Departments { get; set; } = null!;
         public virtual DbSet<File> Files { get; set; } = null!;
         public virtual DbSet<LoginHistory> LoginHistories { get; set; } = null!;
         public virtual DbSet<Mark> Marks { get; set; } = null!;
@@ -98,6 +99,11 @@ namespace TurboJsMVC.Models
                 entity.Property(e => e.Duration).HasMaxLength(150);
 
                 entity.Property(e => e.Name).HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<Department>(entity =>
+            {
+                entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             modelBuilder.Entity<File>(entity =>

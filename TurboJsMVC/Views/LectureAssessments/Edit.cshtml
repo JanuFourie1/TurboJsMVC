@@ -1,0 +1,114 @@
+﻿@model TurboJsMVC.Models.Assessment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Assessment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ModuleId" class="control-label"></label>
+                <input asp-for="ModuleId" class="form-control" />
+                <span asp-validation-for="ModuleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionOneQ" class="control-label"></label>
+                <input asp-for="QuestionOneQ" class="form-control" />
+                <span asp-validation-for="QuestionOneQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionOneA" class="control-label"></label>
+                <input asp-for="QuestionOneA" class="form-control" />
+                <span asp-validation-for="QuestionOneA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionOneO" class="control-label"></label>
+                <input asp-for="QuestionOneO" class="form-control" />
+                <span asp-validation-for="QuestionOneO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionTwoQ" class="control-label"></label>
+                <input asp-for="QuestionTwoQ" class="form-control" />
+                <span asp-validation-for="QuestionTwoQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionTwoA" class="control-label"></label>
+                <input asp-for="QuestionTwoA" class="form-control" />
+                <span asp-validation-for="QuestionTwoA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionTwoO" class="control-label"></label>
+                <input asp-for="QuestionTwoO" class="form-control" />
+                <span asp-validation-for="QuestionTwoO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionThreeQ" class="control-label"></label>
+                <input asp-for="QuestionThreeQ" class="form-control" />
+                <span asp-validation-for="QuestionThreeQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionThreeA" class="control-label"></label>
+                <input asp-for="QuestionThreeA" class="form-control" />
+                <span asp-validation-for="QuestionThreeA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionThreeO" class="control-label"></label>
+                <input asp-for="QuestionThreeO" class="form-control" />
+                <span asp-validation-for="QuestionThreeO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFourQ" class="control-label"></label>
+                <input asp-for="QuestionFourQ" class="form-control" />
+                <span asp-validation-for="QuestionFourQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFourA" class="control-label"></label>
+                <input asp-for="QuestionFourA" class="form-control" />
+                <span asp-validation-for="QuestionFourA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFourO" class="control-label"></label>
+                <input asp-for="QuestionFourO" class="form-control" />
+                <span asp-validation-for="QuestionFourO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFiveQ" class="control-label"></label>
+                <input asp-for="QuestionFiveQ" class="form-control" />
+                <span asp-validation-for="QuestionFiveQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFiveA" class="control-label"></label>
+                <input asp-for="QuestionFiveA" class="form-control" />
+                <span asp-validation-for="QuestionFiveA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionFiveO" class="control-label"></label>
+                <input asp-for="QuestionFiveO" class="form-control" />
+                <span asp-validation-for="QuestionFiveO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

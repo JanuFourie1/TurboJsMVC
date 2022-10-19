@@ -4,7 +4,7 @@ namespace TurboJsMVC.Controllers
 {
     public class LectureDashboardController : Controller
     {
-        public IActionResult Index()
+        public IActionResult LectureDashboard()
         {
             return View();
         }

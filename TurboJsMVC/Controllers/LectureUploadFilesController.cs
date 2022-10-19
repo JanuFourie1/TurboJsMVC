@@ -6,88 +6,89 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TurboJsMVC.Models;
+using File = TurboJsMVC.Models.File;
 
 namespace TurboJsMVC.Controllers
 {
-    public class LectureClassesController : Controller
+    public class LectureUploadFilesController : Controller
     {
         private readonly GRP27ETutorContext _context;
 
-        public LectureClassesController(GRP27ETutorContext context)
+        public LectureUploadFilesController(GRP27ETutorContext context)
         {
             _context = context;
         }
 
-        // GET: LectureClasses
+        // GET: LectureUploadFiles
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Modules.ToListAsync());
+              return View(await _context.Files.ToListAsync());
         }
 
-        // GET: LectureClasses/Details/5
+        // GET: LectureUploadFiles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules
+            var file = await _context.Files
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@module == null)
+            if (file == null)
             {
                 return NotFound();
             }
 
-            return View(@module);
+            return View(file);
         }
 
-        // GET: LectureClasses/Create
+        // GET: LectureUploadFiles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: LectureClasses/Create
+        // POST: LectureUploadFiles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,LectureId,CourseId")] Module @module)
+        public async Task<IActionResult> Create([Bind("Id,Name,ModuleId,UserId")] File file)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@module);
+                _context.Add(file);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@module);
+            return View(file);
         }
 
-        // GET: LectureClasses/Edit/5
+        // GET: LectureUploadFiles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules.FindAsync(id);
-            if (@module == null)
+            var file = await _context.Files.FindAsync(id);
+            if (file == null)
             {
                 return NotFound();
             }
-            return View(@module);
+            return View(file);
         }
 
-        // POST: LectureClasses/Edit/5
+        // POST: LectureUploadFiles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,LectureId,CourseId")] Module @module)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ModuleId,UserId")] File file)
         {
-            if (id != @module.Id)
+            if (id != file.Id)
             {
                 return NotFound();
             }
@@ -96,12 +97,12 @@ namespace TurboJsMVC.Controllers
             {
                 try
                 {
-                    _context.Update(@module);
+                    _context.Update(file);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModuleExists(@module.Id))
+                    if (!FileExists(file.Id))
                     {
                         return NotFound();
                     }
@@ -112,49 +113,49 @@ namespace TurboJsMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@module);
+            return View(file);
         }
 
-        // GET: LectureClasses/Delete/5
+        // GET: LectureUploadFiles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules
+            var file = await _context.Files
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@module == null)
+            if (file == null)
             {
                 return NotFound();
             }
 
-            return View(@module);
+            return View(file);
         }
 
-        // POST: LectureClasses/Delete/5
+        // POST: LectureUploadFiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Modules == null)
+            if (_context.Files == null)
             {
-                return Problem("Entity set 'GRP27ETutorContext.Modules'  is null.");
+                return Problem("Entity set 'GRP27ETutorContext.Files'  is null.");
             }
-            var @module = await _context.Modules.FindAsync(id);
-            if (@module != null)
+            var file = await _context.Files.FindAsync(id);
+            if (file != null)
             {
-                _context.Modules.Remove(@module);
+                _context.Files.Remove(file);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModuleExists(int id)
+        private bool FileExists(int id)
         {
-          return _context.Modules.Any(e => e.Id == id);
+          return _context.Files.Any(e => e.Id == id);
         }
     }
 }

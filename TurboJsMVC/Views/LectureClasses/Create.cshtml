@@ -413,50 +413,102 @@
         </div>
     </header>
     <!--Header area end-->
-<h1>Add a Class</h1>
-
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LectureId" class="control-label"></label> <br/>
-                <input asp-for="LectureId" class="form-control"  />
-                <span asp-validation-for="LectureId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModuleId" class="control-label"></label><br />
-                <input asp-for="ModuleId" class="form-control" />
-                <span asp-validation-for="ModuleId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Day" class="control-label"></label><br />
-                <input asp-for="Day" class="form-control"  />
-                <span asp-validation-for="Day" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeStart" class="control-label"></label><br />
-                <input asp-for="TimeStart" class="form-control" type="time"/>
-                <span asp-validation-for="TimeStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeEnd" class="control-label"></label><br />
-                <input asp-for="TimeEnd" class="form-control" type="time" />
-                <span asp-validation-for="TimeEnd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+      <!--Sidebar start-->
+  <div class="sidebar">
+        <center>
+            <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
+            <h4>Somila Lefume</h4>
+        </center>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+        <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
     </div>
-</div>
+    <!--Sidebar end-->
+    <div class="content">
+        <br />
+        <div>
+            <h2 class="user_header">Create Class</h2>
+            <hr class="ruler" />
+            <br />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="LectureId" class="control-label"></label> <br />
+                        <input asp-for="LectureId" class="form-control" />
+                        <span asp-validation-for="LectureId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ModuleId" class="control-label"></label><br />
+                        <input asp-for="ModuleId" class="form-control" />
+                        <span asp-validation-for="ModuleId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Day" class="control-label"></label><br />
+                        <input asp-for="Day" class="form-control" />
+                        <span asp-validation-for="Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TimeStart" class="control-label"></label><br />
+                        <input asp-for="TimeStart" class="form-control" type="time" />
+                        <span asp-validation-for="TimeStart" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TimeEnd" class="control-label"></label><br />
+                        <input asp-for="TimeEnd" class="form-control" type="time" />
+                        <span asp-validation-for="TimeEnd" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+           </div>
+       </div>
+    </div>
 </body>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+ </div>
+
 </html>
+<script>
+    function LogOut() {
+        window.location = '@Url.Action("Index", "Home")';
+    }
+    function Dashboard() {
+        window.location = '@Url.Action("LectureDashboard", "LectureDashboard")';
+    }
+    function Reporting() {
+        window.location = '@Url.Action("Index", "LectureReporting")';
+    }
+    function Analytics() {
+        window.location = '@Url.Action("Index", "LectureAnalytics")';
+    }
+    function Assessments() {
+        window.location = '@Url.Action("Index", "LectureAssessments")';
+    }
+    function Attendance() {
+        window.location = '@Url.Action("Index", "LectureAttendance")';
+    }
+    function Classes() {
+        window.location = '@Url.Action("Index", "LectureClasses")';
+    }
+    function UploadFiles() {
+        window.location = '@Url.Action("Index", "LectureUploadFiles")';
+    }
+    function Communication() {
+        window.location = '@Url.Action("Index", "AdminCommunication")';
+    }
+</script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

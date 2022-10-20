@@ -533,136 +533,14 @@
                 </tbody>
             </table>
         </div>
-
-
-
     </div>
-   
-<h1>Index</h1>
+
+    <h1> Add Assessment</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add Assessment</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ModuleId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveO)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModuleId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveO)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
 </body>
 </html>
 <script>

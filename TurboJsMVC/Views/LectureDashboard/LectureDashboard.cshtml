@@ -266,28 +266,29 @@
                 <h2><i class="fa-solid fa-screen-users"></i> Total Students</h2>
             </div>
         </div>
-    </div>
-    <div class="table_container tableFixHead">
+    
+         <div class="table_container tableFixHead">
         <table class="styled-table table">
             <thead>
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        Module
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                   
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>                  
                 </tr>
             </thead>
+            <tbody>
 
-           
-            
-        </table>
+
+    </tbody>
+    </table>
         </div>
+    </div>
 </body>
 </html>
 <script>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<TurboJsMVC.Models.Module>
+@{
     Layout = "";
 }
 
@@ -7,8 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>LectureDashboard</title>
+    <title>LectureDashboard</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="@Url.Content("~/images/Lecture/user.jfif")" />
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
             crossorigin="anonymous"></script>
@@ -220,23 +222,100 @@
     </style>
 </head>
 <body>
-
-
+    <input type="checkbox" id="check" />
+    <!--Header area start-->
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+        </div>
+    </header>
     <!--Header area end-->
     <!--Sidebar start-->
     <div class="sidebar">
         <center>
+            <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
             <h4>Somila Lefume</h4>
         </center>
-        <a href="#"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
-        <a href="#"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-        <a href="#"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
-        <a href="#"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
-        <a href="#"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
-        <a href="#"><i class="fa-solid fa-book-open"></i> <span>Modules</span></a>
-        <a href="#"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
-        <a href="#"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+        <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
     </div>
+    <!--Sidebar end-->
+    <div class="content">
+        <h1>Dashboard Lecturer</h1>
+        <div class="counter_container">
+            <div class="counter_card">
+            <h2><i class="fa-solid fa-user"></i> Total Modules</h2>   
+            
+        </div>
+        <div class="counter_card">
+            <h2><i class="fa-solid fa-user"></i> My Modules</h2>                 
+        </div>
+        <div class="counter_card">
+                <h2><i class="fa-solid fa-screen-users"></i> Total Students</h2>
+            </div>
+        </div>
+    </div>
+    <div class="table_container tableFixHead">
+        <table class="styled-table table">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Module
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                   
+                </tr>
+            </thead>
 
+           
+            
+        </table>
+        </div>
 </body>
 </html>
+<script>
+   function LogOut() {
+        window.location = '@Url.Action("Index", "Home")';
+    }
+    function Dashboard() {
+        window.location = '@Url.Action("LectureDashboard", "LectureDashboard")';
+    }
+    function Reporting() {
+        window.location = '@Url.Action("Index", "LectureReporting")';
+    }
+    function Analytics() {
+        window.location = '@Url.Action("Index", "LectureAnalytics")';
+    }
+    function Assessments() {
+        window.location = '@Url.Action("Index", "LectureAssessments")';
+    }
+    function Attendance() {
+        window.location = '@Url.Action("Index", "LectureAttendance")';
+    }
+    function Classes() {
+        window.location = '@Url.Action("Index", "LectureClasses")';
+    }
+    function UploadFiles() {
+        window.location = '@Url.Action("Index", "LectureUploadFiles")';
+    }
+    function Communication() {
+        window.location = '@Url.Action("Index", "AdminCommunication")';
+    }
+</script>

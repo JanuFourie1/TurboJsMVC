@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TurboJsMVC.Models;
 
 namespace TurboJsMVC.Controllers
 {
@@ -6,6 +7,7 @@ namespace TurboJsMVC.Controllers
     {
         public IActionResult LectureDashboard()
         {
+           
             return View();
         }
     }

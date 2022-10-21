@@ -21,25 +21,25 @@ namespace TurboJsMVC.Controllers
         // GET: LectureClasses
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Modules.ToListAsync());
+              return View(await _context.Classes.ToListAsync());
         }
 
         // GET: LectureClasses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Classes == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules
+            var @class = await _context.Classes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@module == null)
+            if (@class == null)
             {
                 return NotFound();
             }
 
-            return View(@module);
+            return View(@class);
         }
 
         // GET: LectureClasses/Create
@@ -53,31 +53,31 @@ namespace TurboJsMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,LectureId,CourseId")] Module @module)
+        public async Task<IActionResult> Create([Bind("Id,LectureId,ModuleId,Day,TimeStart,TimeEnd")] Class @class)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@module);
+                _context.Add(@class);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@module);
+            return View(@class);
         }
 
         // GET: LectureClasses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Classes == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules.FindAsync(id);
-            if (@module == null)
+            var @class = await _context.Classes.FindAsync(id);
+            if (@class == null)
             {
                 return NotFound();
             }
-            return View(@module);
+            return View(@class);
         }
 
         // POST: LectureClasses/Edit/5
@@ -85,9 +85,9 @@ namespace TurboJsMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,LectureId,CourseId")] Module @module)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LectureId,ModuleId,Day,TimeStart,TimeEnd")] Class @class)
         {
-            if (id != @module.Id)
+            if (id != @class.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace TurboJsMVC.Controllers
             {
                 try
                 {
-                    _context.Update(@module);
+                    _context.Update(@class);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModuleExists(@module.Id))
+                    if (!ClassExists(@class.Id))
                     {
                         return NotFound();
                     }
@@ -112,25 +112,25 @@ namespace TurboJsMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@module);
+            return View(@class);
         }
 
         // GET: LectureClasses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Modules == null)
+            if (id == null || _context.Classes == null)
             {
                 return NotFound();
             }
 
-            var @module = await _context.Modules
+            var @class = await _context.Classes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@module == null)
+            if (@class == null)
             {
                 return NotFound();
             }
 
-            return View(@module);
+            return View(@class);
         }
 
         // POST: LectureClasses/Delete/5
@@ -138,23 +138,23 @@ namespace TurboJsMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Modules == null)
+            if (_context.Classes == null)
             {
-                return Problem("Entity set 'GRP27ETutorContext.Modules'  is null.");
+                return Problem("Entity set 'GRP27ETutorContext.Classes'  is null.");
             }
-            var @module = await _context.Modules.FindAsync(id);
-            if (@module != null)
+            var @class = await _context.Classes.FindAsync(id);
+            if (@class != null)
             {
-                _context.Modules.Remove(@module);
+                _context.Classes.Remove(@class);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModuleExists(int id)
+        private bool ClassExists(int id)
         {
-          return _context.Modules.Any(e => e.Id == id);
+          return _context.Classes.Any(e => e.Id == id);
         }
     }
 }

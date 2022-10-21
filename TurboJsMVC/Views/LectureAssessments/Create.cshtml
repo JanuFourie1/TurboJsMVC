@@ -398,28 +398,59 @@
         }
     </style>
 </head>
+<body>
+<input type="checkbox" id="check" />
+<!--Header area start-->
+<header>
+    <label for="check">
+        <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area">
+        <h3>Turbo <span>JS</span></h3>
+    </div>
+    <div class="right_area">
+        <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+    </div>
+</header>
+<!--Header area end-->
+<!--Sidebar start-->
+<div class="sidebar">
+    <center>
+        <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
+        <h4>Somila Lefume</h4>
+    </center>
+    <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+    <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+    <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+    <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+    <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+    <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+    <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+    <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+</div>
 <div class="content">
 
     <div>
-        <h2 class="user_header">Create a new assessment.</h2>
+        <h2 class="user_header">Assessments</h2>
         <hr class="ruler" />
         <br />
     </div>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>              
                 <div class="form-group">
-                    <label asp-for="ModuleId" class="control-label"></label><br />
-                    <input asp-for="ModuleId" class="form-control" />
-                    <span asp-validation-for="ModuleId" class="text-danger"></span>
+                            <label asp-for="ModuleId" class="control-label"></label><br />
+                            <input asp-for="ModuleId" class="form-control" />
+                            <span asp-validation-for="ModuleId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label><br />
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
+                 <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label><br />
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
+                        
                 <div class="form-group">
                     <label asp-for="QuestionOneQ" class="control-label"></label><br />
                     <input asp-for="QuestionOneQ" class="form-control" />
@@ -498,18 +529,46 @@
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
+                    <div class="col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary">View Assessment</a>
+                    </div>
             </form>
         </div>
         <br />
     </div>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+   
 </div>
-
-
-
+</body>
 </html>
+<script>
+    function LogOut() {
+        window.location = '@Url.Action("Index", "Home")';
+    }
+    function Dashboard() {
+        window.location = '@Url.Action("LectureDashboard", "LectureDashboard")';
+    }
+    function Reporting() {
+        window.location = '@Url.Action("Index", "LectureReporting")';
+    }
+    function Analytics() {
+        window.location = '@Url.Action("Index", "LectureAnalytics")';
+    }
+    function Assessments() {
+        window.location = '@Url.Action("Index", "LectureAssessments")';
+    }
+    function Attendance() {
+        window.location = '@Url.Action("Index", "LectureAttendance")';
+    }
+    function Classes() {
+        window.location = '@Url.Action("Index", "LectureClasses")';
+    }
+    function UploadFiles() {
+        window.location = '@Url.Action("Index", "LectureUploadFiles")';
+    }
+    function Communication() {
+        window.location = '@Url.Action("Index", "LectureCommunication")';
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

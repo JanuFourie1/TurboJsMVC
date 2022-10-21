@@ -401,14 +401,46 @@
 </head>
 <body>
     <input type="checkbox" id="check" />
+    <!--Header area start-->
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+        </div>
+    </header>
+    <!--Header area end-->
+    <!--Sidebar start-->
+    <div class="sidebar">
+        <center>
+            <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
+            <h4>Somila Lefume</h4>
+        </center>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+        <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+    </div>
+    <div class="content">
+    <input type="checkbox" id="check" />
             <br />
         <div>
             <h2 class="user_header">Assessment</h2>
         <hr class="ruler"/>
         <br />
+        </div>
 
-        <p>
-            <a asp-action="Create">Create New</a>
+
+       <p>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
         </p>
         <div class="table_container tableFixHead">
             <table class="styled-table table" id="dataTable">
@@ -532,15 +564,16 @@
                     }
                 </tbody>
             </table>
+            <h1> Add Assessment</h1>
+
+            <div class="btn btn-secondary">
+                <a asp-action="Create" class="btn btn-secondary">Add Assessment</a>
+            </div>
+           
         </div>
     </div>
 
-    <h1> Add Assessment</h1>
-
-<p>
-    <a asp-action="Create">Add Assessment</a>
-</p>
-
+  
 </body>
 </html>
 <script>
@@ -569,6 +602,6 @@
         window.location = '@Url.Action("Index", "LectureUploadFiles")';
     }
     function Communication() {
-        window.location = '@Url.Action("Index", "AdminCommunication")';
+        window.location = '@Url.Action("Index", "LectureCommunication")';
     }
 </script>

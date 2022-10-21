@@ -72,7 +72,7 @@ namespace TurboJsMVC.Controllers
         public async Task<IActionResult> GetCourses() { 
             List<Course> courses = new List<Course>();
             courses = _context.Courses.ToList();
-            courses = courses.OrderByDescending(x => x.Id).ToList();
+            courses = courses.OrderBy(x => x.Name).ToList();
             return Ok(courses);
         }
 
@@ -84,12 +84,13 @@ namespace TurboJsMVC.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCourse(int courseId, string name, string description, string duration)
+        public async Task<IActionResult> UpdateCourse(int courseId, string name, string description, string duration, int department)
         {
             Course course = _context.Courses.FirstOrDefault(m => m.Id== courseId);
             course.Name = name;
             course.Description = description;
             course.Duration = duration;
+            course.Department = department;
             _context.Courses.Update(course);
             _context.SaveChanges();
             return Ok("Course updated");

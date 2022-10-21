@@ -384,10 +384,19 @@ a:hover {
 .search-container{
     width: 200px;
 }
+
+.add_btn{
+    margin-left: 10px;
+}
+
+#submit-course{
+    float: right;
+}
     </style>
 </head>
 <body>
     @{Html.RenderPartial("_Admin_EditCourse");}
+    @{Html.RenderPartial("_Admin_Add_Course");}
     <input type="checkbox" id="check"/>
     <!--Header area start-->
      <header>
@@ -427,6 +436,7 @@ a:hover {
 			<div class="input-group-append"><button class="btn btn-primary modal_btn" onclick="FilterTable()"><i class="fas fa-search search_icon"></i></button></div>
             <input id="searchValue" type="text" class="form-control" placeholder="Course Name">
 		</div>
+        <button data-bs-toggle="modal" data-bs-target="#AddModal" class="btn modal_btn add_btn">Add Course</button>
         <br />
         </div>
          <div class="table_container tableFixHead">
@@ -453,28 +463,6 @@ a:hover {
             <br />
             <hr class="ruler"/>
             <br />
-            <div class="course-submission">
-                <form action="@Url.Action("AddCourse", "AdminCourses")" class="form-course">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Name</label>
-    <input name="Name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Course Name" required>
-  </div>
-  <div class="form-group">
-      <br />
-    <label for="exampleFormControlTextarea1">Description</label>
-    <br />
-    <textarea name="Description" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Course Description" required></textarea>
-  </div>
-  <br />
- <div class="form-group">
-    <label for="exampleFormControlInput1">Duration</label>
-    <input name="Duration" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Course Duration" required>
-  </div>
-  <br />
-  <button type="submit" data-bs-dismiss="modal" class="btn modal_btn">Add Course</button>
-</form>
-            </div>
-            
         </div>
     </div>
 </body>
@@ -554,6 +542,7 @@ function EditCourseDetails(id) {
                 document.getElementById("name_edit").value = response.name;
     document.getElementById("description_edit").value = response.description;
     document.getElementById("duration_edit").value = response.duration;
+    document.getElementById("department_select").value = response.department;
             }
         });
 }
@@ -586,6 +575,7 @@ function UpdateCourse() {
     var course_name = document.getElementById("name_edit").value;
     var course_desription = document.getElementById("description_edit").value;
     var course_duration = document.getElementById("duration_edit").value;
+    var course_department = document.getElementById("department_select").value;
     $.ajax({
             "url": "@Url.Action("UpdateCourse", "AdminCourses")",
             "async": true,
@@ -595,7 +585,8 @@ function UpdateCourse() {
                 courseId: CourseId,
                 name: course_name,
                 description: course_desription,
-                duration: course_duration
+                duration: course_duration,
+                department: course_department
             },
             "success": function(response) {
                 toastr.success("Course updated");

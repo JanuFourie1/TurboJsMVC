@@ -1,0 +1,46 @@
+﻿
+<style>
+  </style>
+
+<!-- Modal -->
+<div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Course: <span id="user_edit_name"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action="@Url.Action("AddCourse", "AdminCourses")">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                <input name="Name" id="name_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Course Name" required="true">
+              </div>
+               <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                    <input name="Description" placeholder="Course Description" id="description_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+               </div>
+               <div class="input-group mb-3">
+ <label class="input-group-text" for="inputGroupSelect01">Duration</label>
+                   <input name="Duration" placeholder="Course Duration" id="description_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+               </div>
+               <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Department</label>
+                    <select name="Department" class="form-select" id="department_select">
+      <option value="">-- Select Department --</option>
+    <option value="1">Information Technology</option>
+    <option value="2">Arts and Crafts</option>
+    <option value="3">Engineering</option>
+    <option value="4">Education</option>
+    <option value="5">Law</option>
+  </select>
+               </div>
+               <button type="submit" id="submit-course" class="btn modal_btn">Submit</button>
+          </form>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+  

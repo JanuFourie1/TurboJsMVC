@@ -9,5 +9,6 @@ namespace TurboJsMVC.Models
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string Duration { get; set; } = null!;
+        public int? Department { get; set; }
     }
 }

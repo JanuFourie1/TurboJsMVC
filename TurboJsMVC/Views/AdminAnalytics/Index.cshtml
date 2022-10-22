@@ -441,7 +441,12 @@ a:hover {
         <div class="right">
             <canvas id="myChart2"></canvas>
         </div>
-        
+         <div class="left">
+            <canvas id="myChart3"></canvas>
+        </div>
+        <div class="right">
+            <canvas id="myChart4"></canvas>
+        </div>
     </div>
 </body>
 </html>
@@ -451,7 +456,9 @@ var UserId = 0;
 var EditUserId = 0;
     $(document).ready(function() {
         GetUserTypes();
+        GetUserTypesDetails();
         GetCourseDepartments();
+        GetUserDepartments();
         });
 
 function GetUserTypes() {
@@ -462,6 +469,31 @@ function GetUserTypes() {
             "dataType": "Json",
             "success": function(response) {
                 ExampleChart1(response);
+                ExampleChart4(response);
+            }
+        });
+}
+
+function GetUserTypesDetails() {
+    $.ajax({
+            "url": "@Url.Action("GetAllUsersDetails", "AdminUsers")",
+            "async": true,
+            "type": "GET",
+            "dataType": "Json",
+            "success": function(response) {
+                ExampleChart4(response);
+            }
+        });
+}
+
+function GetUserDepartments() {
+    $.ajax({
+            "url": "@Url.Action("GetAllUsers", "AdminUsers")",
+            "async": true,
+            "type": "GET",
+            "dataType": "Json",
+            "success": function(response) {
+                ExampleChart3(response);
             }
         });
 }
@@ -476,6 +508,73 @@ function GetCourseDepartments(){
                 ExampleChart2(response);
             }
         });
+}
+
+function ExampleChart4(data) {
+        var totalActive = data.filter(item => item.isDeleted === false).length;
+        var totalRemoved = data.filter(item => item.isDeleted === true).length;
+    console.log(data);
+    const ctx = document.getElementById('myChart4').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Active', 'InActive'],
+        datasets: [{
+            label: '# of Votes',
+            data: [totalActive, totalRemoved],
+            backgroundColor: [
+                '#26a69a',
+                '#212529',
+                '#f5a425'
+            ],
+            borderColor: [
+                '#26a69a',
+                '#212529',
+                '#f5a425'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Total Users By Access'
+            }
+        }
+    } 
+});
+}
+
+function ExampleChart3(data) {
+    console.log("data", data);
+    var IT = data.filter(item => item.department === 1).length;
+        var Art = data.filter(item => item.department === 2).length;
+        var Engineering= data.filter(item => item.department === 3).length;
+        var Education = data.filter(item => item.department === 4).length;
+        var Law = data.filter(item => item.department === 5).length;
+    const ctx = document.getElementById('myChart3').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Information Technology', 'Arts and Crafts', 'Engineering', 'Education', 'Law'],
+        datasets: [{
+            label: 'Users',
+            data: [IT, Art, Engineering, Education, Law],
+            fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Total Users By Department'
+            }
+        }
+    }
+});
 }
 
 function ExampleChart1(data) {

@@ -20,6 +20,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <style>
+
+        #datepicker{
+        margin-left: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(22,34,57,0.95);
+        background-color:rgba(22,34,57,0.95);
+        color: white;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  filter: invert(1);
+}
+
+        #datepicker i{
+            color: white;
+        }
+
         *, ::after, ::before {
     box-sizing:initial;
 }
@@ -418,8 +438,14 @@ a:hover {
         <div>
             <h2 class="user_header">Reporting</h2>
         <hr class="ruler"/>
+
+        
         <br />
         </div>
+        <div class="col">
+            <input data-date-format="yyyy-mm-dd" type="date" id="datepicker">
+        </div>
+        <br />
          <div class="table_container tableFixHead">
             <table class="styled-table table" id="dataTable">
                 <thead>
@@ -459,6 +485,17 @@ a:hover {
                             <button onclick="GetUsersReport()" class="btn tbl_btn" type="button" ><i class="fa-solid fa-eye"></i></button>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Date Joined
+                        </td>
+                        <td>
+                           Generates a report to see the users who joined on or after the selected date.
+                        </td>
+                        <td>
+                            <button onclick="GetDateJoined()"  class="btn tbl_btn" type="button" ><i class="fa-solid fa-eye"></i></button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <br />
@@ -472,6 +509,18 @@ a:hover {
 
 function GetUsersReport() {
     window.open('@Url.Action("UsersReport", "AdminReporting")', "_blank");
+}
+
+function GetDateJoined() {
+    var date = document.getElementById("datepicker").value;
+    
+    if (date == "") {
+        alert("Please select a date!");
+    }else{
+        var selectedDate = date;
+        window.open('@Url.Action("JoinedReport", "AdminReporting")?selected=' + selectedDate, "_blank");
+    }
+    
 }
 
 function GetLoginReport() {

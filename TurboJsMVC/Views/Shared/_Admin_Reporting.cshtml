@@ -1,0 +1,42 @@
+﻿
+<style>
+  </style>
+
+<!-- Modal -->
+<div class="modal fade" id="UsersJoinedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Date: <span id="user_edit_name"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action="@Url.Action("AddModule", "AdminModules")">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                <input name="Name" id="name_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Course Name" required="true">
+              </div>
+               <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                    <input name="Description" placeholder="Course Description" id="description_edit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+               </div>
+               <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Course</label>
+                    <select name="CourseId" class="custom-select form-control" id="course_select" required="true">
+                    </select>
+               </div>
+               <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Lecture</label>
+                    <select name="LectureId" class="custom-select form-control" id="lecture_select" required="true">
+    
+                    </select>
+               </div>
+               <button type="submit" id="submit-module" class="btn modal_btn">Submit</button>
+          </form>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+  

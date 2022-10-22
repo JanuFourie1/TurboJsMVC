@@ -112,11 +112,26 @@ namespace TurboJsMVC.Controllers
             return File(_file, "application/pdf");
         }
 
+        public async Task<IActionResult> JoinedReport(string selected)
+        {
+            UserJoinedReport userReport = new UserJoinedReport();
+            byte[] _file = userReport.PrepareReport(GetJoined(DateTime.Parse(selected)));
+            return File(_file, "application/pdf");
+        }
+
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            users = _context.Users.ToList();
-            users = users.OrderByDescending(x => x.DateJoined).ToList();
+            users = _context.Users.Where(q => q.IsDeleted == false).ToList();
+            users = users.OrderBy(x => x.Username).ToList();
+            return users;
+        }
+
+        public List<User> GetJoined(DateTime selected)
+        {
+            List<User> users = new List<User>();
+            users = _context.Users.Where(q => q.DateJoined >= selected).ToList();
+            users = users.OrderBy(x => x.Username).ToList();
             return users;
         }
     }

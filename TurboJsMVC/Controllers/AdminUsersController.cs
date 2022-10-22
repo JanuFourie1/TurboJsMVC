@@ -46,7 +46,7 @@ namespace TurboJsMVC.Controllers
             try
             {
                 List<CustomUser> list = new List<CustomUser>();
-                var users = _context.Users.ToList();
+                var users = _context.Users.Where(q => q.IsDeleted == false).ToList();
                 if (null == users || users.Count < 1)
                 {
                     return BadRequest(users);
@@ -63,7 +63,45 @@ namespace TurboJsMVC.Controllers
                         IsLecture = user.IsLecture,
                         IsStudent = user.IsStudent,
                         StudentNumber = (int)user.StudentNumber,
-                        IsDeleted = user.IsDeleted
+                        IsDeleted = user.IsDeleted,
+                        Department = user.Department
+                    });
+                }
+                SortByName sortByName = new SortByName();
+                list.Sort(sortByName);
+                return Ok(list);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsersDetails()
+        {
+            try
+            {
+                List<CustomUser> list = new List<CustomUser>();
+                var users = _context.Users.ToList();
+                if (null == users || users.Count < 1)
+                {
+                    return BadRequest(users);
+                }
+                foreach (var user in users)
+                {
+                    list.Add(new CustomUser
+                    {
+                        Username = user.Username,
+                        Email = user.Email,
+                        UserId = user.UserId,
+                        DateJoined = user.DateJoined.ToString("dddd, dd MMMM yy"),
+                        IsAdmin = user.IsAdmin,
+                        IsLecture = user.IsLecture,
+                        IsStudent = user.IsStudent,
+                        StudentNumber = (int)user.StudentNumber,
+                        IsDeleted = user.IsDeleted,
+                        Department = user.Department
                     });
                 }
                 SortByName sortByName = new SortByName();

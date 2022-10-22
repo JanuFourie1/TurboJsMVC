@@ -2,7 +2,7 @@
 
 namespace TurboJsMVC.Controllers
 {
-    public class LectureReportingController : Controller
+    public class LectureAnalyticsController : Controller
     {
         public IActionResult Index()
         {

@@ -24,6 +24,31 @@ namespace TurboJsMVC.Controllers
         {
               return View(await _context.Files.ToListAsync());
         }
+        [HttpPost]
+        public async Task<IActionResult> Index(List<IFormFile> userfiles)
+        {
+            try
+            {
+                if (userfiles.Count > 0)
+                {
+                    foreach (var file in userfiles)
+                    {
+                        string filename = file.FileName;
+                        filename = Path.GetFileName(filename);
+                        string uploadpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot//UserFile", filename);
+                        var stream = new FileStream(uploadpath, FileMode.Create);
+                        await file.CopyToAsync(stream);
+                        return RedirectToAction(nameof(Create));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error while uploading the file.";
+            }
+            return View(userfiles);
+        }
+
 
         // GET: LectureUploadFiles/Details/5
         public async Task<IActionResult> Details(int? id)

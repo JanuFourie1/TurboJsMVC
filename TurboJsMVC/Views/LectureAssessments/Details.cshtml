@@ -3,11 +3,440 @@
 @{
     ViewData["Title"] = "Details";
 }
+<!DOCTYPE html>
 
-<h1>Details</h1>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Modules - Turbo.Js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")" />
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        *, ::after, ::before {
+            box-sizing: initial;
+        }
+
+        #submit-module {
+            float: right;
+        }
+
+        .add_btn {
+            margin-left: 10px;
+        }
+
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            line-height: 1;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+            line-height: 1;
+        }
+
+        .user_header {
+            color: rgba(22,34,57,0.95);
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .ruler {
+            font-weight: 600;
+            margin-left: 10px;
+            margin-right: 0px;
+            color: rgba(22,34,57,0.95);
+        }
+
+        header {
+            position: fixed;
+            background: rgba(22,34,57,0.95);
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+        }
+
+        .left_area h3 {
+            color: #f5a425;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .left_area span {
+            color: #ffff
+        }
+
+        .logout_btn {
+            padding: 5px;
+            background-color: #f5a425;
+            text-decoration: none;
+            float: right;
+            margin-top: -30px;
+            margin-right: 40px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.5s;
+            transition-property: background;
+            transform: translateY(-7px)
+        }
+
+            .logout_btn:hover {
+                background: #f5a425;
+            }
+
+        .sidebar {
+            background: rgba(22,34,57,0.95);
+            margin-top: 70px;
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            transition: 0.5s;
+            transition-property: left;
+        }
+
+            .sidebar .profile_image {
+                width: 100px;
+                height: 100px;
+                border-radius: 100px;
+                margin-bottom: 10px;
+            }
+
+            .sidebar h4 {
+                color: #ccc;
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-size: 1rem;
+                font-weight: bold !important;
+            }
+
+            .sidebar a {
+                color: #fff;
+                display: block;
+                width: 100%;
+                line-height: 60px;
+                text-decoration: none;
+                padding-left: 40px;
+                box-sizing: border-box;
+            }
+
+                .sidebar a:hover {
+                    background: #f5a425;
+                }
+
+            .sidebar i {
+                padding-right: 10px;
+            }
+
+        label #sidebar_btn {
+            z-index: 1;
+            color: #fff;
+            position: fixed;
+            cursor: pointer;
+            left: 300px;
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+            label #sidebar_btn:hover {
+                color: #f5a425;
+            }
+
+        #check:checked ~ .sidebar {
+            left: -190px;
+        }
+
+            #check:checked ~ .sidebar a span {
+                display: none;
+            }
+
+            #check:checked ~ .sidebar a {
+                font-size: 20px;
+                margin-left: 170px;
+                width: 80px;
+            }
+
+        #check {
+            transform: translateY(-10px) !important;
+        }
+
+        .content {
+            margin-left: 250px;
+            background-position: center;
+            background-size: cover;
+            height: 93vh;
+            max-height: 93vh;
+            overflow: scroll;
+            transition: 0.5s;
+            transform: translateY(70px);
+            padding-right: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #check:checked ~ .content {
+            margin-left: 60px;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .table_container {
+            align-content: center;
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px !important;
+            table-layout: fixed;
+            border-collapse: collapse;
+            max-height: 76vh;
+            overflow-y: scroll;
+        }
+
+        .styled-table {
+            margin-left: 10px;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .styled-table thead tr {
+                background-color: rgba(22,34,57,0.95);
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+
+            .styled-table tbody tr {
+                border-bottom: thin solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid rgba(22,34,57,0.95);
+                }
+
+        li {
+            list-style-type: none;
+            border: 1px thin;
+        }
+
+        .page_numbers {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+        }
+
+            .page_numbers li {
+                margin-right: 10px;
+            }
+
+        .inactive {
+            border: 1px solid #f5a425;
+            text-decoration: none;
+            /*background-color: white;*/
+            color: black;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .page_numbers a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .active {
+            background-color: #f5a425;
+            border: 1px solid #f5a425;
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .tbl_btn {
+            background-color: #f5a425;
+            border: 1px solid #f5a425;
+            cursor: pointer;
+            border-radius: 6px;
+            color: rgba(22,34,57,0.95);
+        }
+
+        .modal_btn {
+            background-color: #f5a425;
+            border: 1px solid #f5a425;
+            cursor: pointer;
+            border-radius: 6px;
+            color: rgba(22,34,57,0.95);
+            font-weight: bold;
+        }
+
+        .left_area {
+            transform: translateY(-11px);
+        }
+
+        #sidebar_btn {
+            transform: translate(-0px,-13px);
+        }
+
+        td {
+            align-content: center;
+            vertical-align: middle;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+        .btn-primary:active:focus:not(:disabled):not(.disabled),
+        .btn:focus, .btn:active, .btn:hover, .btn-primary:hover {
+            box-shadow: none !important;
+            outline: 0;
+            background-color: #f5a425;
+            border: 1px solid #f5a425;
+        }
+
+        .btn-close:hover, .btn-close:focus, .btn-close:active,
+        .btn-close:active:focus:not(:disabled):not(.disabled),
+        .btn-close:focus, .btn-close:active, .btn-close:hover {
+            box-shadow: none !important;
+            outline: 0;
+        }
+
+        .form-control:hover, .form-control:focus, .form-control:active,
+        .form-control:active:focus:not(:disabled):not(.disabled),
+        .form-control:focus, .form-control:active, .form-control:hover {
+            box-shadow: none !important;
+            outline: 0;
+            border: 1px solid #f5a425;
+        }
+
+        .form-select:hover, .form-select:focus, .form-select:active,
+        .form-select:active:focus:not(:disabled):not(.disabled),
+        .form-select:focus, .form-select:active, .form-select:hover {
+            box-shadow: none !important;
+            outline: 0;
+            border: 1px solid #f5a425;
+        }
+
+
+        .input-group-text {
+            background-color: #f5a425;
+            font-weight: bold;
+        }
+
+        .search {
+            width: 15%;
+            margin-left: 10px;
+        }
+
+        .input-group-append:hover i {
+            color: black;
+        }
+
+        .input-group-append, .input-group-append:focus, .input-group-append:active,
+        .input-group-append:active:focus:not(:disabled):not(.disabled),
+        .input-group-append:focus, .input-group-append:active, .input-group-append:hover i {
+            color: black;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+            color: black;
+        }
+
+        .form-group {
+            width: 50%;
+        }
+
+        .course-submission {
+            background-color: rgba(22,34,57,0.95);
+            border-radius: 10px;
+            padding-left: 10px;
+            padding-right: 15%;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+            .course-submission label {
+                color: white;
+            }
+
+        .form-select {
+            min-width: 100%;
+        }
+
+        .search-container {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check" />
+    <!--Header area start-->
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+        </div>
+    </header>
+    <!--Header area end-->
+    <!--Sidebar start-->
+    <div class="sidebar">
+        <center>
+            <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
+            <h4>Somila Lefume</h4>
+        </center>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+        <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
+    </div>
+    <div class="content">
+        <br />
+        <div>
+            <h2 class="user_header">Assessment Details</h2>
+            <hr class="ruler" />
+            <br />
+        </div>
 
 <div>
-    <h4>Assessment</h4>
+    <h4>Details</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -118,3 +547,33 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+</div>
+</body>
+</html>
+<script>
+    function LogOut() {
+        window.location = '@Url.Action("Index", "Home")';
+    }
+    function Dashboard() {
+        window.location = '@Url.Action("LectureDashboard", "LectureDashboard")';
+    }
+    function Reporting() {
+        window.location = '@Url.Action("Index", "LectureReporting")';
+    }
+   
+    function Assessments() {
+        window.location = '@Url.Action("Index", "LectureAssessments")';
+    }
+    function Attendance() {
+        window.location = '@Url.Action("Index", "LectureAttendance")';
+    }
+    function Classes() {
+        window.location = '@Url.Action("Index", "LectureClasses")';
+    }
+    function UploadFiles() {
+        window.location = '@Url.Action("Index", "LectureUploadFiles")';
+    }
+    function Communication() {
+        window.location = '@Url.Action("Index", "LectureCommunication")';
+    }
+    </script>

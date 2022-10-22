@@ -421,9 +421,8 @@
         </center>
         <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
         <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
         <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
-        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
         <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
         <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
         <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
@@ -439,6 +438,7 @@
 
 <h4>Class</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -507,7 +507,7 @@
         window.location = '@Url.Action("Index", "LectureUploadFiles")';
     }
     function Communication() {
-        window.location = '@Url.Action("Index", "AdminCommunication")';
+        window.location = '@Url.Action("Index", "LectureCommunication")';
     }
 </script>
 @section Scripts {

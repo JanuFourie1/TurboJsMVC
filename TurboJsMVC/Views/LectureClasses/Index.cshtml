@@ -421,9 +421,8 @@
         </center>
         <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
         <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
         <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
-        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-book"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
         <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
         <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
         <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
@@ -434,11 +433,11 @@
             <h2 class="user_header">My Classes</h2>
             <hr class="ruler" />
             <br />
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
+        </div>
+    
+        <div class="table_container tableFixHead">
+            <table class="styled-table table">
+                <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.LectureId)
@@ -478,15 +477,18 @@
                         @Html.DisplayFor(modelItem => item.TimeEnd)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary modal_btn"> <i class="fa-solid fa-pen-to-square"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary modal_btn"><i class="fa-sharp fa-solid fa-circle-info"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary modal_btn"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
+    <br />
+            
+                <a asp-action="Create" class="btn btn-primary modal_btn">Add Class</a>
+            
 </div>
 </div>
 </body>
@@ -500,9 +502,6 @@
     }
     function Reporting() {
         window.location = '@Url.Action("Index", "LectureReporting")';
-    }
-    function Analytics() {
-        window.location = '@Url.Action("Index", "LectureAnalytics")';
     }
     function Assessments() {
         window.location = '@Url.Action("Index", "LectureAssessments")';

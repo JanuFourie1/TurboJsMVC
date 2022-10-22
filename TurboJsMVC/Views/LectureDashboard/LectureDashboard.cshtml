@@ -244,8 +244,7 @@
             <h4>Somila Lefume</h4>
         </center>
         <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
-        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-        <a href="#" onclick="Analytics()"><i class="fa-solid fa-chart-pie"></i> <span>Analytics</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>      
         <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
         <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
         <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
@@ -254,19 +253,22 @@
     </div>
     <!--Sidebar end-->
     <div class="content">
-        <h1>Dashboard Lecturer</h1>
+      
         <div class="counter_container">
             <div class="counter_card">
                 <h2><i class="fa-solid fa-book"></i></h2>                        
                 <h2>Total Modules</h2>
+                <h2> 2 </h2>
         </div>
         <div class="counter_card">
             <h2><i class="fa-solid fa-book"></i></h2>
-            <h2>My Modules</h2>                 
+            <h2>My Modules</h2>
+                <h2> 2 </h2>
         </div>
         <div class="counter_card">
-                <h2><i class="fa-solid fa-user"></i>  </h2>
+                <h2><i class="fa-solid fa-user"></i></h2>
                 <h2>Total Students</h2>
+                <h2> 10 </h2>
             </div>
         </div>
     
@@ -291,18 +293,27 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td style="width: 25%;">@item.Id</td>
-                            <td style="width: 25%;">@item.Name</td>
-                            <td style="width: 25%;">@item.Description</td>
+                            <td style="width: 10%;">@item.Id</td>
+                            <td style="width: 30%;">@item.Name</td>
+                            <td style="width: 60%;">@item.Description</td>
                            
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6">
-            <a asp-action="Index" class="btn btn-secondary">View Assessment</a>
-        </div>
+        <div>
+       @* <h2><i class="fa-solid fa-video-camera"></i> Some Planning Tips!</h2>
+            <iframe 
+                width="100" 
+                height="500"
+                    src="https://www.youtube.com/watch?v=XPpW9UVb_90"
+                    title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>*@
+    </div>
     </div>
 </body>
 </html>
@@ -315,9 +326,6 @@
     }
     function Reporting() {
         window.location = '@Url.Action("Index", "LectureReporting")';
-    }
-    function Analytics() {
-        window.location = '@Url.Action("Index", "LectureAnalytics")';
     }
     function Assessments() {
         window.location = '@Url.Action("Index", "LectureAssessments")';

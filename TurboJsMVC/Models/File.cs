@@ -9,5 +9,7 @@ namespace TurboJsMVC.Models
         public string Name { get; set; } = null!;
         public int ModuleId { get; set; }
         public int UserId { get; set; }
+     
     }
+   
 }

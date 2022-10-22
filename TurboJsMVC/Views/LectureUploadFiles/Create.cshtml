@@ -1,4 +1,4 @@
-﻿@model TurboJsMVC.Models.Assessment
+﻿@model TurboJsMVC.Models.File
 
 @{
     ViewData["Title"] = "Create";
@@ -399,173 +399,96 @@
     </style>
 </head>
 <body>
-<input type="checkbox" id="check" />
-<!--Header area start-->
-<header>
-    <label for="check">
-        <i class="fa-solid fa-bars" id="sidebar_btn"></i>
-    </label>
-    <div class="left_area">
-        <h3>Turbo <span>JS</span></h3>
-    </div>
-    <div class="right_area">
-        <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
-    </div>
-</header>
-<!--Header area end-->
-<!--Sidebar start-->
-<div class="sidebar">
-    <center>
-        <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
-        <h4>Somila Lefume</h4>
-    </center>
-    <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
-    <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
-    <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
-    <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
-    <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
-    <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
-    <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
-</div>
-<div class="content">
-
-    <div>
-        <h2 class="user_header">Assessments</h2>
-        <hr class="ruler" />
-        <br />
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create" >
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>              
-                <div class="form-group">
-                            <label asp-for="ModuleId" class="control-label"></label><br />
-                            <input asp-for="ModuleId" class="form-control" />
-                            <span asp-validation-for="ModuleId" class="text-danger"></span>
-                </div>
-                 <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label><br />
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                        
-                <div class="form-group">
-                    <label asp-for="QuestionOneQ" class="control-label"></label><br />
-                    <input asp-for="QuestionOneQ" class="form-control" />
-                    <span asp-validation-for="QuestionOneQ" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionOneA" class="control-label"></label><br />
-                    <input asp-for="QuestionOneA" class="form-control" />
-                    <span asp-validation-for="QuestionOneA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionOneO" class="control-label"></label><br />
-                    <input asp-for="QuestionOneO" class="form-control" />
-                    <span asp-validation-for="QuestionOneO" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionTwoQ" class="control-label"></label><br />
-                    <input asp-for="QuestionTwoQ" class="form-control" />
-                    <span asp-validation-for="QuestionTwoQ" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionTwoA" class="control-label"></label><br />
-                    <input asp-for="QuestionTwoA" class="form-control" />
-                    <span asp-validation-for="QuestionTwoA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionTwoO" class="control-label"></label><br />
-                    <input asp-for="QuestionTwoO" class="form-control" />
-                    <span asp-validation-for="QuestionTwoO" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionThreeQ" class="control-label"></label><br />
-                    <input asp-for="QuestionThreeQ" class="form-control" />
-                    <span asp-validation-for="QuestionThreeQ" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionThreeA" class="control-label"></label><br />
-                    <input asp-for="QuestionThreeA" class="form-control" />
-                    <span asp-validation-for="QuestionThreeA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionThreeO" class="control-label"></label><br />
-                    <input asp-for="QuestionThreeO" class="form-control" />
-                    <span asp-validation-for="QuestionThreeO" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFourQ" class="control-label"></label><br />
-                    <input asp-for="QuestionFourQ" class="form-control" />
-                    <span asp-validation-for="QuestionFourQ" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFourA" class="control-label"></label><br />
-                    <input asp-for="QuestionFourA" class="form-control" />
-                    <span asp-validation-for="QuestionFourA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFourO" class="control-label"></label><br />
-                    <input asp-for="QuestionFourO" class="form-control" />
-                    <span asp-validation-for="QuestionFourO" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFiveQ" class="control-label"></label><br />
-                    <input asp-for="QuestionFiveQ" class="form-control" />
-                    <span asp-validation-for="QuestionFiveQ" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFiveA" class="control-label"></label><br />
-                    <input asp-for="QuestionFiveA" class="form-control" />
-                    <span asp-validation-for="QuestionFiveA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="QuestionFiveO" class="control-label"></label><br />
-                    <input asp-for="QuestionFiveO" class="form-control" />
-                    <span asp-validation-for="QuestionFiveO" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-                    <div class="col-md-6">
-                        <a asp-action="Index" class="btn btn-primary modal_btn">View Assessment</a>
-                    </div>
-            </form>
+    <input type="checkbox" id="check" />
+    <!--Header area start-->
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
         </div>
-        <br />
+        <div class="right_area">
+            <a href="#" class="logout_btn" onclick="LogOut()">Logout</a>
+        </div>
+    </header>
+    <!--Header area end-->
+    <!--Sidebar start-->
+    <div class="sidebar">
+        <center>
+            <img src="~/images/Lecture/user.jfif" class="profile_image" alt="User Image" />
+            <h4>Somila Lefume</h4>
+        </center>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Reporting()"><i class="fa-solid fa-file-pdf"></i> <span>Reporting</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-book"></i> <span>Assesssments</span></a>
+        <a href="#" onclick="UploadFiles()"><i class="fa-solid fa-download"></i> <span>Upload Files</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-book-open"></i> <span>Classes</span></a>
+        <a href="#" onclick="Attendance()"><i class="fa-solid fa-user"></i> <span>Attendance</span></a>
+        <a href="#" onclick="Communication()"><i class="fa-solid fa-comment"></i> <span>Communication</span></a>
     </div>
-   
-</div>
-</body>
-</html>
-<script>
-    function LogOut() {
-        window.location = '@Url.Action("Index", "Home")';
-    }
-    function Dashboard() {
-        window.location = '@Url.Action("LectureDashboard", "LectureDashboard")';
-    }
-    function Reporting() {
-        window.location = '@Url.Action("Index", "LectureReporting")';
-    }
-   
-    function Assessments() {
-        window.location = '@Url.Action("Index", "LectureAssessments")';
-    }
-    function Attendance() {
-        window.location = '@Url.Action("Index", "LectureAttendance")';
-    }
-    function Classes() {
-        window.location = '@Url.Action("Index", "LectureClasses")';
-    }
-    function UploadFiles() {
-        window.location = '@Url.Action("Index", "LectureUploadFiles")';
-    }
-    function Communication() {
-        window.location = '@Url.Action("Index", "LectureCommunication")';
-    }
-</script>
+    <div class="content">
+
+        <h1>Please Upload File</h1>
+        @using (Html.BeginForm("Create", "LectureUploadFiles", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <b>Upload File</b>
+            <br />
+            <span style="color:red">
+                @ViewBag.Message
+            </span>
+            <br />
+            <input type="file" name="userfiles" multiple />
+            <br />
+            <br />
+            <input type="submit" value="Submit">
+
+
+        }
+        <h4>File</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+
+                @* <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="ModuleId" class="control-label"></label>
+                <input asp-for="ModuleId" class="form-control" />
+                <span asp-validation-for="ModuleId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Name" class="control-label"> Upload File</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                </form>*@
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+    </body>
+    </html>

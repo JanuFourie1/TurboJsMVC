@@ -15,6 +15,7 @@ namespace TurboJsMVC.Controllers
         public IActionResult StudentClass()
         {
             ViewData["Classes"] = GetClasses();
+            ViewData["Modules"] = GetModules();
             return View();
         }
 
@@ -22,6 +23,16 @@ namespace TurboJsMVC.Controllers
         {
             List<Class> classes = new List<Class>(_context.Classes);
             return classes;
+        }
+        private List<Module> GetModules()
+        {
+            List<Module> modules = new List<Module>(_context.Modules);
+            return modules;
+        }
+        public List<User> GetLecturers()
+        {   
+            List<User> lecturers = new List<User>(_context.Users);
+            return lecturers;
         }
     }
 }

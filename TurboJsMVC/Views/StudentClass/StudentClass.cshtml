@@ -1,6 +1,7 @@
 ﻿@using TurboJsMVC
 @{
     IEnumerable<Class> classes = ViewData["Classes"] as IEnumerable<Class>;
+    IEnumerable<Module> modules = ViewData["Modules"] as IEnumerable<Module>;
 }
 <!DOCTYPE html>
 
@@ -403,7 +404,7 @@
         <a href="#"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
         <a asp-controller="StudentClass" asp-action="StudentClass"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
         <a href="#"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
-        <a href="#"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
+        <a asp-controller="StudentCommunication" asp-action="Index"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
     </div>
     <!--Sidebar end-->
     <div class="content">
@@ -417,6 +418,9 @@
                     <tr>
                         <th>
                             Module ID
+                        </th>
+                        <th>
+                            Module
                         </th>
                         <th>
                             Day
@@ -433,20 +437,32 @@
                 <tbody>
                     @foreach (Class classe in classes)
                     {
-                        <tr>
-                            <td>
-                                @classe.ModuleId
-                            </td>
-                            <td>
-                                @classe.Day
-                            </td>
-                            <td>
-                                @classe.TimeStart
-                            </td>
-                            <td>
-                                @classe.TimeEnd
-                            </td>
-                        </tr>
+                        @foreach (Module module in modules)
+                        {
+                            if(classe.ModuleId == module.Id)
+                            {
+                                <tr>
+                                    <td>
+                                        @classe.ModuleId
+                                    </td>
+                                    <td>
+                                        @module.Name
+                                    </td>
+                                    <td>
+                                        @classe.Day
+                                    </td>
+                                    <td>
+                                        @classe.TimeStart
+                                    </td>
+                                    <td>
+                                        @classe.TimeEnd
+                                    </td>
+                                </tr>
+                            }
+                            
+
+                        }
+                        
                     }
                 </tbody>
             </table>

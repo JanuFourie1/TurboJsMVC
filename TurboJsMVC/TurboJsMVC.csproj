@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\StudentStudyMaterial\" />
     <Folder Include="wwwroot\UserFile\" />
   </ItemGroup>
 

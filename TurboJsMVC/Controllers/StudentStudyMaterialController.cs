@@ -3,29 +3,22 @@ using TurboJsMVC.Models;
 
 namespace TurboJsMVC.Controllers
 {
-    public class StudentCourseController : Controller
+    public class StudentStudyMaterialController : Controller
     {
         private readonly GRP27ETutorContext _context;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public StudentCourseController(GRP27ETutorContext context, IHttpContextAccessor httpContextAccessor)
+        public StudentStudyMaterialController(GRP27ETutorContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             this.httpContextAccessor = httpContextAccessor;
         }
-        [HttpGet]
-        public IActionResult StudentCourse()
+
+        public IActionResult Index()
         {
             var username = HttpContext.Session.GetString("Username") ?? "";
             ViewBag.Username = username;
-            ViewData["Courses"] = GetCourses();
             return View();
-        }
-
-        public List<Course> GetCourses()
-        {
-            List<Course> courses = new List<Course>(_context.Courses);
-            return courses;
         }
     }
 }

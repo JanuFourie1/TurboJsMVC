@@ -1,137 +1,378 @@
 ﻿@model IEnumerable<TurboJsMVC.Models.Assessment>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<!DOCTYPE Html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Student Assessment</title>
+    <title>Assessment - Turbo.Js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
 
-<h1>Index</h1>
+        header {
+            position: fixed;
+            background: rgba(22,34,57,0.95);
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModuleId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionOneO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionTwoO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionThreeO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFourO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveQ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionFiveO)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModuleId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionOneO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionTwoO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionThreeO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFourO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveQ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionFiveO)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        .left_area h3 {
+            color: #f5a425;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .left_area span {
+            color: #ffff
+        }
+
+        .logout_btn {
+            padding: 5px;
+            background-color: #f5a425;
+            text-decoration: none;
+            float: right;
+            margin-top: -30px;
+            margin-right: 40px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.5s;
+            transition-property: background;
+        }
+
+            .logout_btn:hover {
+                background: #f5a425;
+            }
+
+        .sidebar {
+            background: rgba(22,34,57,0.95);
+            margin-top: 70px;
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            transition: 0.5s;
+            transition-property: left;
+        }
+
+            .sidebar .profile_image {
+                width: 100px;
+                height: 100px;
+                border-radius: 100px;
+                margin-bottom: 10px;
+            }
+
+            .sidebar h4 {
+                color: #ccc;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+
+            .sidebar a {
+                color: #fff;
+                display: block;
+                width: 100%;
+                line-height: 60px;
+                text-decoration: none;
+                padding-left: 40px;
+                box-sizing: border-box;
+            }
+
+                .sidebar a:hover {
+                    background: #f5a425;
+                }
+
+            .sidebar i {
+                padding-right: 10px;
+            }
+
+        li {
+            list-style-type: none;
+        }
+
+        label #sidebar_btn {
+            z-index: 1;
+            color: #fff;
+            position: fixed;
+            cursor: pointer;
+            left: 300px;
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+            label #sidebar_btn:hover {
+                color: #f5a425;
+            }
+
+        #check:checked ~ .sidebar {
+            left: -190px;
+        }
+
+            #check:checked ~ .sidebar a span {
+                display: none;
+            }
+
+            #check:checked ~ .sidebar a {
+                font-size: 20px;
+                margin-left: 170px;
+                width: 80px;
+            }
+
+        .content {
+            margin-left: 250px;
+            background-position: center;
+            background-size: cover;
+            height: 93vh;
+            max-height: 93vh;
+            overflow: scroll;
+            transition: 0.5s;
+            transform: translateY(70px);
+            padding-right: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #check:checked ~ .content {
+            margin-left: 60px;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .counter_container {
+            display: flex;
+            padding: 10px;
+            padding-right: 0px;
+            justify-content: space-between;
+        }
+
+        .counter_card {
+            border-radius: 10PX;
+            width: 20%;
+            background-color: rgba(22,34,57,0.95);
+        }
+
+            .counter_card h2 {
+                color: #fff;
+                font-weight: 600;
+                text-align: center;
+            }
+
+        .table_container {
+            align-content: center;
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px !important;
+            table-layout: fixed;
+            border-collapse: collapse;
+            max-height: 76vh;
+            overflow-y: scroll;
+        }
+
+        .styled-table {
+            margin-left: 10px;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .styled-table thead tr {
+                background-color: rgba(22,34,57,0.95);
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+
+            .styled-table tbody tr {
+                border-bottom: thin solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid rgba(22,34,57,0.95);
+                }
+
+        li {
+            list-style-type: none;
+            border: 1px thin;
+        }
+
+        .page_numbers {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+        }
+
+            .page_numbers li {
+                margin-right: 10px;
+                transform: translateX(-40px);
+            }
+
+        .inactive {
+            border: 1px solid #f5a425;
+            text-decoration: none;
+            /*background-color: white;*/
+            color: black;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .page_numbers a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .active {
+            background-color: #f5a425;
+            border: 1px solid #f5a425;
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+   
+    <input type="checkbox" id="check" />
+    <!--Header area start-->
+    <header>
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Turbo <span>JS</span></h3>
+        </div>
+        <div class="right_area">
+            <a asp-controller="home" asp-action="Index" class="logout_btn">Logout</a>
+        </div>
+    </header>
+    <!--Header area end-->
+    <!--Sidebar start-->
+    <div class="sidebar">
+        <center>
+            <img src="~/images/Student/Another User Image.png" class="profile_image" alt="User Img" />
+            <h4>@ViewBag.Username</h4>
+        </center>
+        <a asp-controller="StudentDashboard" asp-action="StudentDashboard"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a asp-controller="StudentCourse" asp-action="StudentCourse"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
+        <a asp-controller="StudentAssessment" asp-action="Index"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
+        <a asp-controller="StudentClass" asp-action="StudentClass"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
+        <a href="#"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
+        <a asp-controller="StudentCommunication" asp-action="Index"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
+    </div>
+    <!--Sidebar end-->
+
+    <div class="content">
+        <br />
+        <h2 class="user_header"><i class="fa-solid fa-desktop"></i> Student Assessment</h2>
+        <hr class="ruler" />
+        <br />
+        <table class="table">
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuestionOneQ)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="QuestionOneQ" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionOneA)" />
+                            @Html.DisplayFor(modelItem => item.QuestionOneA)
+                            <br />
+                            <input type="radio" id="QuestionOneQ" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionOneO)" />
+                            @Html.DisplayFor(modelItem => item.QuestionOneO)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuestionTwoQ)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="option2a" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionTwoA)" />
+                            @Html.DisplayFor(modelItem => item.QuestionTwoA)
+                            <br />
+                            <input type="radio" id="option2b" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionTwoO)" />
+                            @Html.DisplayFor(modelItem => item.QuestionTwoO)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuestionThreeQ)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <input type="radio" id="option3a" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionThreeA)" />
+                        @Html.DisplayFor(modelItem => item.QuestionThreeA)
+                        <br />
+                        <input type="radio" id="option3b" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionThreeO)" />
+                        @Html.DisplayFor(modelItem => item.QuestionThreeO)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuestionFourQ)
+                        </td>
+                    </tr>
+                    <tr>
+                         <td>
+                            <input type="radio" id="option4a" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionFourA)" />
+                            @Html.DisplayFor(modelItem => item.QuestionFourA)
+                            <br />
+                            <input type="radio" id="option4b" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionFourA)" />
+                            @Html.DisplayFor(modelItem => item.QuestionFourO)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuestionFiveQ)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="option5a" name="@Html.DisplayFor(modelItem => item.Id)" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionFiveA)" />
+                            @Html.DisplayFor(modelItem => item.QuestionFiveA)
+                            <br />
+                            <input type="radio" id="option5b" name="@Html.DisplayFor(modelItem => item.Id)" class="rb" value="@Html.DisplayFor(modelItem => item.QuestionFiveO)" />
+                            @Html.DisplayFor(modelItem => item.QuestionFiveO)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</body>
+</html>
+

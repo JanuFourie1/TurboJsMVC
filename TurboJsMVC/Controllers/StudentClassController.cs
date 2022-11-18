@@ -6,14 +6,18 @@ namespace TurboJsMVC.Controllers
     public class StudentClassController : Controller
     {
         private readonly GRP27ETutorContext _context;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public StudentClassController(GRP27ETutorContext context)
+        public StudentClassController(GRP27ETutorContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            this.httpContextAccessor = httpContextAccessor;
         }
         [HttpGet]
         public IActionResult StudentClass()
         {
+            var username = HttpContext.Session.GetString("Username") ?? "";
+            ViewBag.Username = username;
             ViewData["Classes"] = GetClasses();
             ViewData["Modules"] = GetModules();
             return View();

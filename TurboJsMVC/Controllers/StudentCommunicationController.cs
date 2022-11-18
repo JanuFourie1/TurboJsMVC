@@ -9,15 +9,19 @@ namespace TurboJsMVC.Controllers
     {
         private readonly IToastNotification _toastNotification;
         private readonly GRP27ETutorContext _context;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public StudentCommunicationController(GRP27ETutorContext context, IToastNotification toastNotification)
+        public StudentCommunicationController(GRP27ETutorContext context, IToastNotification toastNotification, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _toastNotification = toastNotification; 
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
         {
+            var username = HttpContext.Session.GetString("Username") ?? "";
+            ViewBag.Username = username;
             return View();
         }
 

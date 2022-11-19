@@ -28,6 +28,9 @@ namespace TurboJsMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEmail(string user, string subj, string body)
         {
+            var username = HttpContext.Session.GetString("Username") ?? "";
+            ViewBag.Username = username;
+
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(subj) || string.IsNullOrEmpty(body))
             {
                 _toastNotification.AddErrorToastMessage("Error, please try again");

@@ -291,7 +291,7 @@
         <a asp-controller="StudentCourse" asp-action="StudentCourse"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
         <a asp-controller="StudentAssessment" asp-action="Index"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
         <a asp-controller="StudentClass" asp-action="StudentClass"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
-        <a href="#"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
+        <a asp-controller="StudentStudyMaterial" asp-action="Index"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
         <a asp-controller="StudentCommunication" asp-action="Index"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
     </div>
     <!--Sidebar end-->
@@ -340,7 +340,7 @@
                                 @course.Duration
                             </td>
                             <td>
-                                <input type="submit" class="btn modal_btn" style="color: white" value="Enrol">
+                                <input type="submit" class="btn btn-primary" value="Enrol">
                             </td>
                         </tr>
                     }
@@ -354,10 +354,10 @@
             {
                 <label for="CourseId" class="form-label">Please enter course ID</label>
                 @Html.TextBoxFor(a => a.CourseId, new { placeholder = "Please enter course Id", type="text", required=""})
-               
-                <button type="submit">Enrol</button>
+
+                <button type="submit" class="btn btn-success">Enrol</button>
             }
-            <button onclick="HomeView()">Back To Home</button>
+            
         </div>
         <div>
             <h2><i class="fa-solid fa-video-camera"></i> Why Enrol?</h2>

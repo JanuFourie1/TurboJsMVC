@@ -285,17 +285,17 @@
         <a asp-controller="StudentCourse" asp-action="StudentCourse"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
         <a asp-controller="StudentAssessment" asp-action="Index"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
         <a asp-controller="StudentClass" asp-action="StudentClass"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
-        <a href="#"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
+        <a asp-controller="StudentStudyMaterial" asp-action="Index"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
         <a asp-controller="StudentCommunication" asp-action="Index"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
     </div>
     <!--Sidebar end-->
 
     <div class="content">
         <br />
-        <h2 class="user_header"><i class="fa-solid fa-desktop"></i> Student Assessment</h2>
+        <h2 class="user_header"><i class="fa-solid fa-briefcase"></i> Student Assessment</h2>
         <hr class="ruler" />
         <br />
-        <table class="table">
+        <table class="table styled-table">
 
             <tbody>
                 @foreach (var item in Model)
@@ -373,6 +373,35 @@
                 }
             </tbody>
         </table>
+        <button type="button" id="quizbtn" class="btn btn-success" onclick="displayresults()">Submit</button>
+        <label id="useranswers"></label>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () 
+            {
+                $("#quizbtn").click(function()
+                {
+                    $(".rb").show();
+                    $(".rb").attr("disabled", true)
+                });
+            });
+
+            function displayresults() {
+                document.getElementById("useranswers").innerHTML = "";
+                var result = document.getElementsByTagName('input');
+                for(i = 0; i<result.length;i++)
+                {
+                    if(result[i].type == "radio")
+                    {
+                        if(result[i].checked)
+                        {
+                            document.getElementById("useranswers").innerHTML += "The selected answer is: " + result[1].value + "<br/>";
+                        }
+                    }
+                }
+            }
+        </script>
 </body>
 </html>
 

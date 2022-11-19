@@ -1,15 +1,12 @@
 ﻿@using TurboJsMVC
-@{
-    IEnumerable<Class> classes = ViewData["Classes"] as IEnumerable<Class>;
-    IEnumerable<Module> modules = ViewData["Modules"] as IEnumerable<Module>;
-}
+
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Class - Turbo.Js</title>
-    <title>Class - Turbo.Js</title>
+    <title>Study Material - Turbo.Js</title>
+    <title>Study Material - Turbo.Js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="@Url.Content("~/images/dahsboard/Logo.png")" />
     <style>
@@ -377,6 +374,28 @@
         .form-select {
             min-width: 100%;
         }
+
+        .collapsible {
+            background-color: rgba(22,34,57,0.95);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+            .active, .collapsible:hover {
+                background-color: #f5a425;
+            }
+
+        .colcontent {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
@@ -410,66 +429,39 @@
     <!--Sidebar end-->
     <div class="content">
         <br />
-        <h2 class="user_header"><i class="fa-solid fa-hourglass"></i> Classes</h2>
+        <h2 class="user_header"><i class="fa-solid fa-book-open"></i> Study Material</h2>
         <hr class="ruler" />
         <br />
-        <div class="table_container tableFixHead">
-            <table class="styled-table table">
-                <thead>
-                    <tr>
-                        <th>
-                            Module ID
-                        </th>
-                        <th>
-                            Module
-                        </th>
-                        <th>
-                            Day
-                        </th>
-                        <th>
-                            Start Time 
-                        </th>
-                        <th>
-                            End Time
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (Class classe in classes)
-                    {
-                        @foreach (Module module in modules)
-                        {
-                            if(classe.ModuleId == module.Id)
-                            {
-                                <tr>
-                                    <td>
-                                        @classe.ModuleId
-                                    </td>
-                                    <td>
-                                        @module.Name
-                                    </td>
-                                    <td>
-                                        @classe.Day
-                                    </td>
-                                    <td>
-                                        @classe.TimeStart
-                                    </td>
-                                    <td>
-                                        @classe.TimeEnd
-                                    </td>
-                                </tr>
-                            }
-                            
-
-                        }
-                        
-                    }
-                </tbody>
-            </table>
-
+        <p>Collapsible Set:</p>
+        <button type="button" class="collapsible">Open Section 1</button>
+        <div class="colcontent">
+            <p>No content posted yet.</p>
         </div>
-    </div>
+        <button type="button" class="collapsible">Open Section 2</button>
+        <div class="colcontent">
+            <p>No content posted yet.</p>
+        </div>
+        <button type="button" class="collapsible">Open Section 3</button>
+        <div class="colcontent">
+            <p>No content posted yet.</p>
+        </div>
 
+    </div>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

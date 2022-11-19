@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TurboJsMVC.Common;
 using TurboJsMVC.Models;
 
 namespace TurboJsMVC.Controllers
@@ -29,17 +31,28 @@ namespace TurboJsMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> StudentEnrolment(StudentEnrollment enrol)
+        public async Task<IActionResult> Enrolment(StudentEnrollment enrol)
         {
+            var username = HttpContext.Session.GetString("Username") ?? "";
+            ViewBag.Username = username;
 
-            var userId = HttpContext.Session.GetInt32("UserId");
+            
             StudentEnrollment list = new StudentEnrollment();
-            list.UserId = (int)userId;
+            list.UserId = HttpContext.Session.GetInt32("UserId");
             list.CourseId = enrol.CourseId;
             _context.StudentEnrollments.Add(list);
-            await _context.SaveChangesAsync();
+            var result =  await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "StudyMaterial");
+            if(result > 0)
+            {
+                 var userCheck = await _context.StudentEnrollments.FirstOrDefaultAsync(a => a.UserId.Equals(enrol.UserId));
+                 HttpContext.Session.SetInt32("CourseId", userCheck.CourseId);
+                 return RedirectToAction("Index", "StudentStudyMaterial");
+            }
+            else
+            {
+                return RedirectToAction("Index", "StudentEnrolment");
+            }
         }
     }
     

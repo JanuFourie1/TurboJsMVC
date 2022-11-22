@@ -419,12 +419,12 @@
             <img src="~/images/Student/Another User Image.png" class="profile_image" alt="User Img" />
             <h4>@ViewBag.Username</h4>
         </center>
-        <a asp-controller="StudentDashboard" asp-action="StudentDashboard"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
-        <a asp-controller="StudentCourse" asp-action="StudentCourse"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
-        <a asp-controller="StudentAssessment" asp-action="Index"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
-        <a asp-controller="StudentClass" asp-action="StudentClass"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
-        <a asp-controller="StudentStudyMaterial" asp-action="Index"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
-        <a asp-controller="StudentCommunication" asp-action="Index"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
+        <a href="#" onclick="Dashboard()"><i class="fa-solid fa-desktop"></i> <span>Dashboard</span></a>
+        <a href="#" onclick="Courses()"><i class="fa-solid fa-book"></i> <span>Courses</span></a>
+        <a href="#" onclick="Assessments()"><i class="fa-solid fa-briefcase"></i> <span>Assessments</span></a>
+        <a href="#" onclick="Classes()"><i class="fa-solid fa-hourglass"></i> <span>Classes</span></a>
+        <a href="#" onclick="StudyMaterials()"><i class="fa-solid fa-book-open"></i> <span>Study Materials</span></a>
+        <a href="#" onclick="Communications()"><i class="fa-solid fa-comments"></i> <span>Communication</span></a>
     </div>
     <!--Sidebar end-->
     <div class="content">
@@ -461,6 +461,25 @@
                     content.style.display = "block";
                 }
             });
+        }
+
+        function Dashboard() {
+            window.location = '@Url.Action("StudentDashboard", "StudentDashboard")';
+        }
+        function Courses() {
+            window.location = '@Url.Action("StudentCourse", "StudentCourse")';
+        }
+        function Assessments() {
+            window.location = '@Url.Action("Index", "StudentAssessment")';
+        }
+        function Classes() {
+            window.location = '@Url.Action("StudentClass", "StudentClass")';
+        }
+        function StudyMaterials() {
+            window.location = '@Url.Action("Index", "StudentStudyMaterial")';
+        }
+        function Communications() {
+            window.location = '@Url.Action("Index", "StudentCommunication")';
         }
     </script>
 </body>

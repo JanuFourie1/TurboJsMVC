@@ -46,7 +46,7 @@ namespace TurboJsMVC.Controllers
             if(result > 0)
             {
                  var userCheck = await _context.StudentEnrollments.FirstOrDefaultAsync(a => a.UserId.Equals(enrol.UserId));
-                 HttpContext.Session.SetInt32("CourseId", userCheck.CourseId);
+                 
                  return RedirectToAction("Index", "StudentStudyMaterial");
             }
             else
